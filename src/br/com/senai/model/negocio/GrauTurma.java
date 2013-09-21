@@ -1,4 +1,4 @@
-package br.com.senai.model;
+package br.com.senai.model.negocio;
 
 public class GrauTurma {
     

@@ -1,8 +1,8 @@
-package br.com.senai.model;
+package br.com.senai.model.negocio;
 
 import java.util.Date;
 
-public class Reservas {
+public class Reserva {
     
     private int codigo;
     private Date dt_cadastro;

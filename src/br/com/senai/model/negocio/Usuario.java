@@ -1,4 +1,4 @@
-package br.com.senai.model;
+package br.com.senai.model.negocio;
 
 import java.util.Date;
 

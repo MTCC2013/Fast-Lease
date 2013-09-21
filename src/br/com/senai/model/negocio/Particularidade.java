@@ -1,6 +1,6 @@
-package br.com.senai.model;
+package br.com.senai.model.negocio;
 
-public class Particularidades {
+public class Particularidade {
     
     private int codigo;
     private int qnt_maquina;

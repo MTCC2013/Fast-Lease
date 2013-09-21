@@ -1,6 +1,6 @@
-package br.com.senai.model;
+package br.com.senai.model.negocio;
 
-public class Turmas {
+public class Curso {
     private String codigo;
     private String turma;
     private int id_tipo;

@@ -1,8 +1,8 @@
-package br.com.senai.model;
+package br.com.senai.model.negocio;
 
 import java.util.Date;
 
-public class Softwares {
+public class Software {
     
     private int codigo;
     private String software;
