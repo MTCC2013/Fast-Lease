@@ -1,5 +1,10 @@
 package br.com.model.negocio;
 
+/**
+ *
+ * @author Antônio da Silva Júnior / Mauricio Pires Cardoso
+ * @version 1.0 21/09/2013
+ */
 public class GrauTurma {
     
     private int codigo;

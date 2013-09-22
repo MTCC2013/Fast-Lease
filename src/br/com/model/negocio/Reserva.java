@@ -2,6 +2,11 @@ package br.com.model.negocio;
 
 import java.util.Date;
 
+/**
+ *
+ * @author Antônio da Silva Júnior / Mauricio Pires Cardoso
+ * @version 1.0 21/09/2013
+ */
 public class Reserva {
     
     private int codigo;
