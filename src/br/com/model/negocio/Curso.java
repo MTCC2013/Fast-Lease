@@ -1,16 +1,28 @@
 package br.com.model.negocio;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+
 /**
  *
  * @author Antônio da Silva Júnior / Mauricio Pires Cardoso
  * @version 1.0 21/09/2013
  */
+@Entity
 public class Curso {
+    @Id
+    @GeneratedValue
     private String codigo;
     private String curso;
-    private int id_tipo;
     private String fase;
     private double duracao;
+    
+    @OneToMany
+    @JoinColumn (name = "idGrauTurma", referencedColumnName = "codigo")
+    private GrauTurma idGrauTurma;
 
     public String getCodigo() {
         return codigo;
@@ -28,14 +40,22 @@ public class Curso {
         this.curso = curso;
     }
 
-    public int getId_tipo() {
-        return id_tipo;
+    public String getCurso() {
+        return curso;
     }
 
-    public void setId_tipo(int id_tipo) {
-        this.id_tipo = id_tipo;
+    public void setCurso(String curso) {
+        this.curso = curso;
     }
 
+    public GrauTurma getIdGrauTurma() {
+        return idGrauTurma;
+    }
+
+    public void setIdGrauTurma(GrauTurma idGrauTurma) {
+        this.idGrauTurma = idGrauTurma;
+    }
+   
     public String getFase() {
         return fase;
     }

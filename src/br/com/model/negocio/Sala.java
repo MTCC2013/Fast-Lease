@@ -1,15 +1,29 @@
 package br.com.model.negocio;
+
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
 /**
  *
  * @author Antônio da Silva Júnior / Mauricio Pires Cardoso
  * @version 1.0 21/09/2013
  */
-public class Sala {
+@Entity
+public class Sala implements Serializable {
     
+    @Id
+    @GeneratedValue
     private int codigo;
     private String nome;
-    private int id_part;
     private String tipo;
+    
+    @OneToOne
+    @JoinColumn (name = "id_part", referencedColumnName = "codigo")
+    private Particularidade idPart;
 
     public int getCodigo() {
         return codigo;
@@ -27,13 +41,14 @@ public class Sala {
         this.nome = nome;
     }
 
-    public int getId_part() {
-        return id_part;
+    public Particularidade getIdPart() {
+        return idPart;
     }
 
-    public void setId_part(int id_part) {
-        this.id_part = id_part;
+    public void setIdPart(Particularidade idPart) {
+        this.idPart = idPart;
     }
+  
 
     public String getTipo() {
         return tipo;

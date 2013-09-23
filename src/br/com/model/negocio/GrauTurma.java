@@ -1,12 +1,18 @@
 package br.com.model.negocio;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 /**
  *
  * @author Antônio da Silva Júnior / Mauricio Pires Cardoso
  * @version 1.0 21/09/2013
  */
+@Entity
 public class GrauTurma {
-    
+    @Id
+    @GeneratedValue
     private int codigo;
     private String grau_turma;
 

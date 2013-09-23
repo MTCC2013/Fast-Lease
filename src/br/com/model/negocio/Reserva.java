@@ -1,20 +1,39 @@
 package br.com.model.negocio;
 
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author Antônio da Silva Júnior / Mauricio Pires Cardoso
  * @version 1.0 21/09/2013
  */
+@Entity
 public class Reserva {
     
+    @Id
+    @GeneratedValue
     private int codigo;
+    
+    @Temporal(TemporalType.DATE)
     private Date dt_cadastro;
-    private int cod_sala;
-    private int cod_prof;
-    private int turno;
+    private String turno;
+    @Temporal(TemporalType.DATE)
     private Date dt_reserva;
+    
+    @OneToMany
+    @JoinColumn (name = "codSala", referencedColumnName = "codigo")
+    private Sala codSala;
+    
+    @OneToMany
+    @JoinColumn (name = "codSala", referencedColumnName = "codigo")
+    private Usuario codUsuario;
 
     public int getCodigo() {
         return codigo;
@@ -32,28 +51,28 @@ public class Reserva {
         this.dt_cadastro = dt_cadastro;
     }
 
-    public int getCod_sala() {
-        return cod_sala;
-    }
-
-    public void setCod_sala(int cod_sala) {
-        this.cod_sala = cod_sala;
-    }
-
-    public int getCod_prof() {
-        return cod_prof;
-    }
-
-    public void setCod_prof(int cod_prof) {
-        this.cod_prof = cod_prof;
-    }
-
-    public int getTurno() {
+    public String getTurno() {
         return turno;
     }
 
-    public void setTurno(int turno) {
+    public void setTurno(String turno) {
         this.turno = turno;
+    }
+
+    public Sala getCodSala() {
+        return codSala;
+    }
+
+    public void setCodSala(Sala codSala) {
+        this.codSala = codSala;
+    }
+
+    public Usuario getCodUsuario() {
+        return codUsuario;
+    }
+
+    public void setCodUsuario(Usuario codUsuario) {
+        this.codUsuario = codUsuario;
     }
 
     public Date getDt_reserva() {

@@ -1,13 +1,21 @@
 package br.com.model.negocio;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 /**
  *
  * @author Antônio da Silva Júnior / Mauricio Pires Cardoso
  * @version 1.0 21/09/2013
  */
-public class AreaUsuario {
-    
+@Entity
+public class AreaUsuario implements Serializable {
+    @Id
+    @GeneratedValue
     private int codigo;
+    
     private String area;
 
     public int getCodigo() {
