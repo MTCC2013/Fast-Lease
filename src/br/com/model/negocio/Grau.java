@@ -10,11 +10,11 @@ import javax.persistence.Id;
  * @version 1.0 21/09/2013
  */
 @Entity
-public class GrauTurma {
+public class Grau {
     @Id
     @GeneratedValue
     private int codigo;
-    private String grau_turma;
+    private String grau;
 
     public int getCodigo() {
         return codigo;
@@ -24,12 +24,12 @@ public class GrauTurma {
         this.codigo = codigo;
     }
 
-    public String getGrau_turma() {
-        return grau_turma;
+    public String getGrau() {
+        return grau;
     }
 
-    public void setGrau_turma(String grau_turma) {
-        this.grau_turma = grau_turma;
+    public void setGrau(String grau) {
+        this.grau = grau;
     }
     
     

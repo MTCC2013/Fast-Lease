@@ -22,7 +22,7 @@ public class Curso {
     
     @OneToMany
     @JoinColumn (name = "idGrauTurma", referencedColumnName = "codigo")
-    private GrauTurma idGrauTurma;
+    private Grau idGrauTurma;
 
     public int getCodigo() {
         return codigo;
@@ -40,11 +40,11 @@ public class Curso {
         this.curso = curso;
     }
 
-    public GrauTurma getIdGrauTurma() {
+    public Grau getIdGrauTurma() {
         return idGrauTurma;
     }
 
-    public void setIdGrauTurma(GrauTurma idGrauTurma) {
+    public void setIdGrauTurma(Grau idGrauTurma) {
         this.idGrauTurma = idGrauTurma;
     }
    

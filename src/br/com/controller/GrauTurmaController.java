@@ -1,5 +1,5 @@
 package br.com.controller;
-import br.com.model.negocio.GrauTurma;
+import br.com.model.negocio.Grau;
 
 import br.com.model.persistencia.GrauTurmaDAOImpl;
 import br.com.model.persistencia.dao.GrauTurmaDAO;
@@ -14,7 +14,7 @@ import java.util.List;
 public class GrauTurmaController {
     
     
-     public boolean salvar(GrauTurma grauturma) {
+     public boolean salvar(Grau grauturma) {
         GrauTurmaDAO dao = new GrauTurmaDAOImpl();
        return dao.save(grauturma);
 
@@ -22,26 +22,26 @@ public class GrauTurmaController {
 
     public boolean excluir(int id) {
         GrauTurmaDAO dao = new GrauTurmaDAOImpl();
-        return dao.remove(GrauTurma.class, id);
+        return dao.remove(Grau.class, id);
 
     }
     
-    public List<GrauTurma> listarGrauTurma() {
+    public List<Grau> listarGrauTurma() {
         GrauTurmaDAO dao = new GrauTurmaDAOImpl();
-        return dao.getAll(GrauTurma.class);
+        return dao.getAll(Grau.class);
     }
     
-    public GrauTurma listarGrauTurmaById (int id){
+    public Grau listarGrauTurmaById (int id){
         GrauTurmaDAO dao = new GrauTurmaDAOImpl();
-        return dao.getById(GrauTurma.class, id);
+        return dao.getById(Grau.class, id);
     }
     
-   public List<GrauTurma> listarByGrauTurma (String grauturma){
+   public List<Grau> listarByGrauTurma (String grauturma){
         GrauTurmaDAO dao = new GrauTurmaDAOImpl();
         return dao.ListByGrauTurma(grauturma);
     }
    
-   public GrauTurma getByGrauTurma(String grauturma){
+   public Grau getByGrauTurma(String grauturma){
        GrauTurmaDAO dao = new GrauTurmaDAOImpl();
        return dao.getByGrauTurma(grauturma);
    }

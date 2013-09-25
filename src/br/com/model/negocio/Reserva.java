@@ -34,6 +34,10 @@ public class Reserva {
     @OneToMany
     @JoinColumn (name = "codSala", referencedColumnName = "codigo")
     private Usuario codUsuario;
+    
+    @OneToMany
+    @JoinColumn (name = "codCurso", referencedColumnName = "codigo")
+    private Curso codCurso;
 
     public int getCodigo() {
         return codigo;
@@ -75,6 +79,14 @@ public class Reserva {
         this.codUsuario = codUsuario;
     }
 
+    public Curso getCodCurso() {
+        return codCurso;
+    }
+
+    public void setCodCurso(Curso codCurso) {
+        this.codCurso = codCurso;
+    }
+    
     public Date getDt_reserva() {
         return dt_reserva;
     }
