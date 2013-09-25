@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -23,7 +24,9 @@ public class Usuario {
     private String nome;
     private String login;
     private String senha;
-    private String cargo;
+    @OneToOne
+    @JoinColumn (name = "codCargo", referencedColumnName = "codigo")
+    private int codCargo;
     
     @Temporal (TemporalType.DATE)
     private Date data_cadastro;
@@ -83,14 +86,14 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public String getCargo() {
-        return cargo;
+    public int getCodCargo() {
+        return codCargo;
     }
 
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
+    public void setCodCargo(int codCargo) {
+        this.codCargo = codCargo;
     }
-
+      
     public Date getData_cadastro() {
         return data_cadastro;
     }
