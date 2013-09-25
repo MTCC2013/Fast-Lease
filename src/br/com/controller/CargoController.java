@@ -1,8 +1,8 @@
 package br.com.controller;
 import br.com.model.negocio.Cargo;
 
-import br.com.model.persist.CargoDAOImpl;
-import br.com.model.persist.dao.CargoDAO;
+import br.com.model.persistencia.CargoDAOImpl;
+import br.com.model.persistencia.dao.CargoDAO;
 import java.util.List;
 
 

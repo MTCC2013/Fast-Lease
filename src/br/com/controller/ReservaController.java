@@ -1,8 +1,8 @@
 package br.com.controller;
 import br.com.model.negocio.Reserva;
 
-import br.com.model.persist.ReservaDAOImpl;
-import br.com.model.persist.dao.ReservaDAO;
+import br.com.model.persistencia.ReservaDAOImpl;
+import br.com.model.persistencia.dao.ReservaDAO;
 import java.util.List;
 
 

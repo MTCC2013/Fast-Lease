@@ -1,4 +1,4 @@
-package br.com.model.persist.dao;
+package br.com.model.persistencia.dao;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;

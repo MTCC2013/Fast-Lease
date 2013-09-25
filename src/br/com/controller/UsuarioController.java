@@ -1,8 +1,8 @@
 package br.com.controller;
 import br.com.model.negocio.Usuario;
 
-import br.com.model.persist.UsuarioDAOImpl;
-import br.com.model.persist.dao.UsuarioDAO;
+import br.com.model.persistencia.UsuarioDAOImpl;
+import br.com.model.persistencia.dao.UsuarioDAO;
 import java.util.List;
 
 

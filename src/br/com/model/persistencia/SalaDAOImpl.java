@@ -1,7 +1,7 @@
-package br.com.model.persist;
+package br.com.model.persistencia;
 
 import br.com.model.negocio.Sala;
-import br.com.model.persist.dao.SalaDAO;
+import br.com.model.persistencia.dao.SalaDAO;
 import java.util.List;
 import javax.persistence.Query;
 

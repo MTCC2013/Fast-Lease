@@ -1,8 +1,8 @@
 package br.com.controller;
 import br.com.model.negocio.TipoSala;
 
-import br.com.model.persist.TipoSalaDAOImpl;
-import br.com.model.persist.dao.TipoSalaDAO;
+import br.com.model.persistencia.TipoSalaDAOImpl;
+import br.com.model.persistencia.dao.TipoSalaDAO;
 import java.util.List;
 
 

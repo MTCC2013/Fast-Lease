@@ -1,4 +1,4 @@
-package br.com.model.persist.dao;
+package br.com.model.persistencia.dao;
 import br.com.model.negocio.TipoSala;
 import java.util.List;
 

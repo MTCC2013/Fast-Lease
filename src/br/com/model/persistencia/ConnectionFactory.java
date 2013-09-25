@@ -1,4 +1,4 @@
-package br.com.model.persist;
+package br.com.model.persistencia;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

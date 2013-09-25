@@ -1,8 +1,8 @@
 package br.com.controller;
 import br.com.model.negocio.GrauTurma;
 
-import br.com.model.persist.GrauTurmaDAOImpl;
-import br.com.model.persist.dao.GrauTurmaDAO;
+import br.com.model.persistencia.GrauTurmaDAOImpl;
+import br.com.model.persistencia.dao.GrauTurmaDAO;
 import java.util.List;
 
 

@@ -1,7 +1,7 @@
-package br.com.model.persist;
+package br.com.model.persistencia;
 
 import br.com.model.negocio.GrauTurma;
-import br.com.model.persist.dao.GrauTurmaDAO;
+import br.com.model.persistencia.dao.GrauTurmaDAO;
 import java.util.List;
 import javax.persistence.Query;
 

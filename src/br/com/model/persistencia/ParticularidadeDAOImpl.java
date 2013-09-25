@@ -1,6 +1,6 @@
-package br.com.model.persist;
+package br.com.model.persistencia;
 import br.com.model.negocio.Particularidade;
-import br.com.model.persist.dao.ParticularidadeDAO;
+import br.com.model.persistencia.dao.ParticularidadeDAO;
 import java.util.List;
 import javax.persistence.Query;
 

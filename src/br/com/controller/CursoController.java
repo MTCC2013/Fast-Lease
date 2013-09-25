@@ -1,8 +1,8 @@
 package br.com.controller;
 import br.com.model.negocio.Curso;
 
-import br.com.model.persist.CursoDAOImpl;
-import br.com.model.persist.dao.CursoDAO;
+import br.com.model.persistencia.CursoDAOImpl;
+import br.com.model.persistencia.dao.CursoDAO;
 import java.util.List;
 
 

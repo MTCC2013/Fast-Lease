@@ -1,8 +1,8 @@
 package br.com.controller;
 import br.com.model.negocio.Particularidade;
 
-import br.com.model.persist.ParticularidadeDAOImpl;
-import br.com.model.persist.dao.ParticularidadeDAO;
+import br.com.model.persistencia.ParticularidadeDAOImpl;
+import br.com.model.persistencia.dao.ParticularidadeDAO;
 import java.util.List;
 
 

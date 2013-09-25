@@ -1,8 +1,8 @@
 package br.com.controller;
 import br.com.model.negocio.Sala;
 
-import br.com.model.persist.SalaDAOImpl;
-import br.com.model.persist.dao.SalaDAO;
+import br.com.model.persistencia.SalaDAOImpl;
+import br.com.model.persistencia.dao.SalaDAO;
 import java.util.List;
 
 
