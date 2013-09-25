@@ -15,7 +15,7 @@ import javax.persistence.OneToMany;
 public class Curso {
     @Id
     @GeneratedValue
-    private String codigo;
+    private int codigo;
     private String curso;
     private String fase;
     private double duracao;
@@ -24,20 +24,12 @@ public class Curso {
     @JoinColumn (name = "idGrauTurma", referencedColumnName = "codigo")
     private GrauTurma idGrauTurma;
 
-    public String getCodigo() {
+    public int getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
+    public void setCodigo(int codigo) {
         this.codigo = codigo;
-    }
-
-    public String getTurma() {
-        return curso;
-    }
-
-    public void setTurma(String curso) {
-        this.curso = curso;
     }
 
     public String getCurso() {
