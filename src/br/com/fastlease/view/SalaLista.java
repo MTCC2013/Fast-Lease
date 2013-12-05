@@ -1,7 +1,7 @@
 package br.com.fastlease.view;
 
-import br.com.senai.controller.*;
-import br.com.senai.model.Sala;
+import br.com.fastlease.controller.*;
+import br.com.fastlease.model.Sala;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
@@ -18,7 +18,8 @@ public class SalaLista extends javax.swing.JFrame {
     public SalaLista() {
 
         initComponents();
-        setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
+        setResizable(false);
+        setLocationRelativeTo(null);
         List<Sala> lista = new ArrayList<Sala>();
         SalaController a = new SalaController();
         lista = a.buscarSala();
@@ -42,16 +43,17 @@ public class SalaLista extends javax.swing.JFrame {
         painelInf = new javax.swing.JPanel();
         painelCabecalhoCliente1 = new javax.swing.JPanel();
         labelCadCliente1 = new javax.swing.JLabel();
-        labelNomeRelFun = new javax.swing.JLabel();
-        cmpNomePesq = new javax.swing.JTextField();
         btExcluir = new javax.swing.JButton();
         btEditar = new javax.swing.JButton();
         btInserir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaSala = new javax.swing.JTable();
+        jPanel6 = new javax.swing.JPanel();
+        labelNomeRelFun1 = new javax.swing.JLabel();
+        cmpNomePesq = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Histórico do Funcionário");
+        setTitle("Lista de Salas");
 
         painelPrincipal.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -89,20 +91,6 @@ public class SalaLista extends javax.swing.JFrame {
         labelCadCliente1.setText("SALAS");
         labelCadCliente1.setToolTipText("");
         labelCadCliente1.setOpaque(true);
-
-        labelNomeRelFun.setForeground(new java.awt.Color(255, 255, 255));
-        labelNomeRelFun.setText("Nome: ");
-
-        cmpNomePesq.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmpNomePesqActionPerformed(evt);
-            }
-        });
-        cmpNomePesq.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                cmpNomePesqKeyPressed(evt);
-            }
-        });
 
         btExcluir.setBackground(new java.awt.Color(255, 255, 255));
         btExcluir.setText("Excluir");
@@ -151,34 +139,27 @@ public class SalaLista extends javax.swing.JFrame {
         painelCabecalhoCliente1Layout.setHorizontalGroup(
             painelCabecalhoCliente1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(painelCabecalhoCliente1Layout.createSequentialGroup()
-                .addContainerGap()
+                .add(10, 10, 10)
                 .add(labelCadCliente1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 244, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(66, 66, 66)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(btExcluir)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(btEditar)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(btInserir)
-                .add(193, 193, 193)
-                .add(labelNomeRelFun)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(cmpNomePesq, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
                 .addContainerGap())
         );
         painelCabecalhoCliente1Layout.setVerticalGroup(
             painelCabecalhoCliente1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, painelCabecalhoCliente1Layout.createSequentialGroup()
-                .add(0, 0, Short.MAX_VALUE)
+            .add(painelCabecalhoCliente1Layout.createSequentialGroup()
+                .add(20, 20, 20)
                 .add(labelCadCliente1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 32, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
             .add(painelCabecalhoCliente1Layout.createSequentialGroup()
                 .addContainerGap()
                 .add(painelCabecalhoCliente1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(labelNomeRelFun, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(cmpNomePesq, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(btExcluir)
+                    .add(btInserir)
                     .add(btEditar)
-                    .add(btInserir))
-                .addContainerGap(14, Short.MAX_VALUE))
+                    .add(btExcluir)))
         );
 
         tabelaSala.setModel(new javax.swing.table.DefaultTableModel(
@@ -194,28 +175,69 @@ public class SalaLista extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabelaSala);
 
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar"));
+
+        labelNomeRelFun1.setText("Sala:");
+
+        cmpNomePesq.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmpNomePesqActionPerformed(evt);
+            }
+        });
+        cmpNomePesq.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cmpNomePesqKeyPressed(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout jPanel6Layout = new org.jdesktop.layout.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(labelNomeRelFun1)
+                .add(18, 18, 18)
+                .add(cmpNomePesq, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(jPanel6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(labelNomeRelFun1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(cmpNomePesq, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
         org.jdesktop.layout.GroupLayout painelPrincipalLayout = new org.jdesktop.layout.GroupLayout(painelPrincipal);
         painelPrincipal.setLayout(painelPrincipalLayout);
         painelPrincipalLayout.setHorizontalGroup(
             painelPrincipalLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(paineSup, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, painelInf, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, painelPrincipalLayout.createSequentialGroup()
+            .add(painelPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(painelPrincipalLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(jScrollPane1)
-                    .add(painelCabecalhoCliente1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .add(painelPrincipalLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(painelPrincipalLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                        .add(painelCabecalhoCliente1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE))
+                    .add(jPanel6, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         painelPrincipalLayout.setVerticalGroup(
             painelPrincipalLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(painelPrincipalLayout.createSequentialGroup()
                 .add(paineSup, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(painelCabecalhoCliente1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
-                .add(18, 18, 18)
+                .add(painelCabecalhoCliente1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 44, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(26, 26, 26)
+                .add(jPanel6, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 272, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(26, 26, 26)
                 .add(painelInf, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -249,20 +271,25 @@ public class SalaLista extends javax.swing.JFrame {
      * @param evt
      */
     private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
-
         int selecionado = -1;
         selecionado = tabelaSala.getSelectedRow();
 
-        if (selecionado >= 0) {
-            Integer i = (Integer) model.getValueAt(selecionado, 0);
-            SalaController mc = new SalaController();
-            mc.remover(i);
-            model.removeSala(selecionado);
+        String message = "Você tem certeza que deseja excluir?";
+        String title = "Deseja sair?";
+        int condicao = JOptionPane.showConfirmDialog(null, message, title, JOptionPane.YES_NO_OPTION);
+        if (condicao == JOptionPane.YES_OPTION) {
 
-        } else {
-            JOptionPane.showMessageDialog(null, "É necesário selecionar uma tabela");
+            if (selecionado >= 0) {
+                Integer i = (Integer) model.getValueAt(selecionado, 0);
+                UsuarioController cc = new UsuarioController();
+                cc.excluir(i);
+                model.removeSala(selecionado);
+                JOptionPane.showMessageDialog(null, "Sala excluída com sucesso");
+
+            } else {
+                JOptionPane.showMessageDialog(null, "É necessário selecionar uma linha");
+            }
         }
-
     }//GEN-LAST:event_btExcluirActionPerformed
 
     /**
@@ -326,9 +353,10 @@ public class SalaLista extends javax.swing.JFrame {
     private javax.swing.JButton btExcluir;
     private javax.swing.JButton btInserir;
     private javax.swing.JTextField cmpNomePesq;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelCadCliente1;
-    private javax.swing.JLabel labelNomeRelFun;
+    private javax.swing.JLabel labelNomeRelFun1;
     private javax.swing.JPanel paineSup;
     private javax.swing.JPanel painelCabecalhoCliente1;
     private javax.swing.JPanel painelInf;

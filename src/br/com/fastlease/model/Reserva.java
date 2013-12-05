@@ -10,28 +10,28 @@ import java.util.Date;
 
 public class Reserva {
     
-    private int codigo;
-    private Date dt_cadastro;
+    private int id;
+    private Date dtCadastro;
     private String turno;
-    private Date dt_reserva;
-    private String sala;
-    private String usuario;
-    private String curso;
+    private String dtReserva;
+    private Sala idSala;
+    private Usuario idUsuario;
+    private Curso idCurso;
 
-    public int getCodigo() {
-        return codigo;
+    public int getId() {
+        return id;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public Date getDt_cadastro() {
-        return dt_cadastro;
+    public Date getDtCadastro() {
+        return dtCadastro;
     }
 
-    public void setDt_cadastro(Date dt_cadastro) {
-        this.dt_cadastro = dt_cadastro;
+    public void setDtCadastro(Date dtCadastro) {
+        this.dtCadastro = dtCadastro;
     }
 
     public String getTurno() {
@@ -42,38 +42,41 @@ public class Reserva {
         this.turno = turno;
     }
 
-    public String getUsuario() {
-        return usuario;
+    public String getDtReserva() {
+        return dtReserva;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setDtReserva(String dtReserva) {
+        this.dtReserva = dtReserva;
     }
 
-    public String getCurso() {
-        return curso;
+    public Sala getIdSala() {
+        return idSala;
     }
 
-    public void setCurso(String curso) {
-        this.curso = curso;
+    public void setIdSala(Sala idSala) {
+        this.idSala = idSala;
+    }
+
+    public Usuario getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Usuario idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public Curso getIdCurso() {
+        return idCurso;
+    }
+
+    public void setIdCurso(Curso idCurso) {
+        this.idCurso = idCurso;
     }
     
-    public Date getDt_reserva() {
-        return dt_reserva;
-    }
-
-    public void setDt_reserva(Date dt_reserva) {
-        this.dt_reserva = dt_reserva;
-    }
-
-    public String getSala() {
-        return sala;
-    }
-
-    public void setSala(String sala) {
-        this.sala = sala;
+    @Override
+    public String toString() {
+        return this.turno;
     }
     
-    
-        
-}
+   }

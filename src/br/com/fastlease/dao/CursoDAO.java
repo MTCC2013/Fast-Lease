@@ -1,6 +1,6 @@
 package br.com.fastlease.dao;
 
-import br.com.model.negocio.Curso;
+import br.com.fastlease.model.Curso;
 import java.util.List;
 
 /**

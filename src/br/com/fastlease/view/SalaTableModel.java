@@ -1,7 +1,8 @@
 package br.com.fastlease.view;
 
-import br.com.senai.model.Bloco;
-import br.com.senai.model.Sala;
+import br.com.fastlease.model.Arquetipo;
+import br.com.fastlease.model.Bloco;
+import br.com.fastlease.model.Sala;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -55,9 +56,9 @@ public class SalaTableModel extends AbstractTableModel {
         } else if (columnIndex == COL_NOME) {
             return String.class;
         } else if (columnIndex == COL_ARQUETIPO) {
-            return String.class;
+            return Arquetipo.class;
         } else if (columnIndex == COL_BLOCO) {
-            return String.class;
+            return Bloco.class;
         }else if (columnIndex == COL_PISO) {
             return String.class;
         } 
@@ -84,7 +85,7 @@ public class SalaTableModel extends AbstractTableModel {
         } else if (column == COL_NOME) {
             return c.getNome();
         } else if (column == COL_ARQUETIPO) {
-            return c.getArquetipo();
+            return c.getIdArquetipo();
         } else if (column == COL_BLOCO) {
             return c.getIdBloco();
         } else if (column == COL_PISO) {
@@ -102,11 +103,11 @@ public class SalaTableModel extends AbstractTableModel {
         } else if (column == COL_NOME) {
             c1.setNome((String) aValue);
         } else if (column == COL_ARQUETIPO) {
-            c1.setArquetipo((String) aValue);
+            c1.setIdArquetipo((Arquetipo) aValue);
         } else if (column == COL_BLOCO) {
             c1.setIdBloco((Bloco) aValue);
         } else if (column == COL_PISO) {
-            c1.setPiso((Integer) aValue);
+            c1.setPiso((String) aValue);
         } 
     }
 

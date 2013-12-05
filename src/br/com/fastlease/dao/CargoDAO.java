@@ -5,7 +5,7 @@
 package br.com.fastlease.dao;
 
 
-import br.com.model.negocio.Cargo;
+import br.com.fastlease.model.Cargo;
 import java.util.List;
 
 /**

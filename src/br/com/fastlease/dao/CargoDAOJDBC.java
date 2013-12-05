@@ -4,7 +4,7 @@
  */
 package br.com.fastlease.dao;
 
-import br.com.model.negocio.Cargo;
+import br.com.fastlease.model.Cargo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -83,7 +83,7 @@ public class CargoDAOJDBC implements CargoDAO {
                 // Pega os dados que estão no objeto passado parametro e 
                 //coloca na instrução de retorno
                 pstm.setString(1, cargo.getCargo());
-                pstm.setInt(2,cargo.getCodigo());
+                pstm.setInt(2,cargo.getId());
                 //Executa o comando sql.
                 pstm.execute();
                 JOptionPane.showMessageDialog(null, "Cargo atualizado com sucesso!");
@@ -151,7 +151,7 @@ public class CargoDAOJDBC implements CargoDAO {
             rs = pstm.executeQuery();
             while (rs.next()) {
                 Cargo cargo = new Cargo();
-                cargo.setCodigo(rs.getInt("codigo"));
+                cargo.setId(rs.getInt("codigo"));
                 cargo.setCargo(rs.getString("cargo"));
                 cargos.add(cargo);
             }
@@ -187,7 +187,7 @@ public class CargoDAOJDBC implements CargoDAO {
             rs = pstm.executeQuery();
             while (rs.next()) {
                 Cargo carg = new Cargo();
-                carg.setCodigo(rs.getInt("codigo"));
+                carg.setId(rs.getInt("codigo"));
                 carg.setCargo(rs.getString("cargo"));
                 cargos.add(carg);
             }
@@ -221,7 +221,7 @@ public class CargoDAOJDBC implements CargoDAO {
             pstm.setInt(1,codigo);
             rs = pstm.executeQuery();
             while (rs.next()) {
-                cargo.setCodigo(rs.getInt("codigo"));
+                cargo.setId(rs.getInt("codigo"));
                 cargo.setCargo(rs.getString("cargo"));
                
                              
@@ -252,7 +252,7 @@ public class CargoDAOJDBC implements CargoDAO {
             pstm.setString(1,nome);
             rs = pstm.executeQuery();
             while (rs.next()) {
-                cargo.setCodigo(rs.getInt("codigo"));
+                cargo.setId(rs.getInt("codigo"));
                 cargo.setCargo(rs.getString("cargo"));
                
                              

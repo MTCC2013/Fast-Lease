@@ -1,8 +1,8 @@
 package br.com.fastlease.dao;
 
-import br.com.model.negocio.AreaUsuario;
-import br.com.model.negocio.Cargo;
-import br.com.model.negocio.Usuario;
+import br.com.fastlease.model.AreaUsuario;
+import br.com.fastlease.model.Cargo;
+import br.com.fastlease.model.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,13 +26,13 @@ public class UsuarioDAOJDBC implements UsuarioDAO {
     private final String LIST = "SELECT * FROM usuario, cargo, area_usuario WHERE \n" +
     "usuario.id_cargo = cargo.codigo\n" +
     "AND usuario.id_area = area_usuario.codigo";
-    private final String LIST_NOME = "select * from usuario, cargo, area_usuario where usuario.id_cargo = cargo.codigo and"
-            + " usuario.id_area = area_usuario.codigo and nome like ?";
+    private final String LIST_NOME ="select * from usuario, cargo, area_usuario where usuario.id_cargo = cargo.codigo and "
+            + "usuario.id_area = area_usuario.codigo and usuario.nome like ?"; 
     private final String LIST_ID = "select * from usuario, cargo, area_usuario where usuario.id_cargo = cargo.codigo and "
             + "usuario.id_area = area_usuario.codigo and usuario.codigo = ?";
     private final String LIST_NOM = "select * from usuario, cargo, area_usuario where usuario.id_cargo = cargo.codigo and"
             + " usuario.id_area = area_usuario.codigo and nome = ?";
-    
+    private final String VERIFICALOGIN = "SELECT LOGIN, SENHA FROM USUARIO WHERE LOGIN = ? AND SENHA = ? ";
    
 
     /**
@@ -55,9 +55,9 @@ public class UsuarioDAOJDBC implements UsuarioDAO {
                 pstm.setString(1, usuario.getNome());
                 pstm.setString(2,usuario.getLogin());
                 pstm.setString(3,usuario.getSenha());
-                pstm.setInt(4,usuario.getCargo().getCodigo());
-                pstm.setDate(5, new java.sql.Date(usuario.getData_cadastro().getTime()));
-                pstm.setInt(6,usuario.getAreaUsuario().getCodigo());
+                pstm.setInt(4,usuario.getIdCargo().getId());
+                pstm.setDate(5, new java.sql.Date(usuario.getDataCadastro().getTime()));
+                pstm.setInt(6,usuario.getIdAreaUsuario().getId());
                                
                 //Executa o comando sql.
                 pstm.execute();
@@ -98,10 +98,10 @@ public class UsuarioDAOJDBC implements UsuarioDAO {
                 pstm.setString(1, usuario.getNome());
                 pstm.setString(2,usuario.getLogin());
                 pstm.setString(3,usuario.getSenha());
-                pstm.setInt(4,usuario.getCargo().getCodigo());
-                pstm.setDate(5, new java.sql.Date(usuario.getData_cadastro().getTime()));
-                pstm.setInt(6,usuario.getAreaUsuario().getCodigo());
-                pstm.setInt(6, usuario.getCodigo());
+                pstm.setInt(4,usuario.getIdCargo().getId());
+                pstm.setDate(5, new java.sql.Date(usuario.getDataCadastro().getTime()));
+                pstm.setInt(6,usuario.getIdAreaUsuario().getId());
+                pstm.setInt(7, usuario.getId());
                 //Executa o comando sql.
                 pstm.execute();
                 JOptionPane.showMessageDialog(null, "A usuario foi atualizado com sucesso!");
@@ -172,19 +172,19 @@ public class UsuarioDAOJDBC implements UsuarioDAO {
             rs = pstm.executeQuery();
             while (rs.next()) {
                 Usuario usuario = new Usuario();
-                usuario.setCodigo(rs.getInt("codigo"));
+                usuario.setId(rs.getInt("codigo"));
                 usuario.setNome(rs.getString("nome"));
                 usuario.setLogin(rs.getString("login"));
                 usuario.setSenha(rs.getString("senha"));
                 Cargo c = new Cargo();
-                c.setCodigo(rs.getInt("cargo.codigo"));
+                c.setId(rs.getInt("cargo.codigo"));
                 c.setCargo(rs.getString("cargo.cargo"));
-                usuario.setCargo(c);
-                usuario.setData_cadastro(rs.getDate("data_cadastro"));
+                usuario.setIdCargo(c);
+                usuario.setDataCadastro(rs.getDate("data_cadastro"));
                 AreaUsuario au = new AreaUsuario();
-                au.setCodigo(rs.getInt("area_usuario.codigo"));
+                au.setId(rs.getInt("area_usuario.codigo"));
                 au.setArea(rs.getString("area_usuario.area"));
-                usuario.setAreaUsuario(au);
+                usuario.setIdAreaUsuario(au);
                 usuarios.add(usuario);
             }
             FabricaConecta.fecharConexao(conn, pstm, rs);
@@ -222,19 +222,19 @@ public class UsuarioDAOJDBC implements UsuarioDAO {
             rs = pstm.executeQuery();
             while (rs.next()) {
                 Usuario usuario = new Usuario();
-                usuario.setCodigo(rs.getInt("codigo"));
+                usuario.setId(rs.getInt("codigo"));
                 usuario.setNome(rs.getString("nome"));
                 usuario.setLogin(rs.getString("login"));
                 usuario.setSenha(rs.getString("senha"));
                 Cargo c = new Cargo();
-                c.setCodigo(rs.getInt("cargo.codigo"));
+                c.setId(rs.getInt("cargo.codigo"));
                 c.setCargo(rs.getString("cargo.cargo"));
-                usuario.setCargo(c);
-                usuario.setData_cadastro(rs.getDate("data_cadastro"));
+                usuario.setIdCargo(c);
+                usuario.setDataCadastro(rs.getDate("data_cadastro"));
                 AreaUsuario au = new AreaUsuario();
-                au.setCodigo(rs.getInt("area_usuario.codigo"));
+                au.setId(rs.getInt("area_usuario.codigo"));
                 au.setArea(rs.getString("area_usuario.area"));
-                usuario.setAreaUsuario(au);
+                usuario.setIdAreaUsuario(au);
                 usuarios.add(usuario);
             }
             FabricaConecta.fecharConexao(conn, pstm, rs);
@@ -267,19 +267,19 @@ public class UsuarioDAOJDBC implements UsuarioDAO {
             pstm.setInt(1,codigo);
             rs = pstm.executeQuery();
             while (rs.next()) {
-                usuario.setCodigo(rs.getInt("usuario.codigo"));
+                usuario.setId(rs.getInt("usuario.codigo"));
                 usuario.setNome(rs.getString("nome"));
                 usuario.setLogin(rs.getString("login"));
                 usuario.setSenha(rs.getString("senha"));
                 Cargo c = new Cargo();
-                c.setCodigo(rs.getInt("cargo.codigo"));
+                c.setId(rs.getInt("cargo.codigo"));
                 c.setCargo(rs.getString("cargo.cargo"));
-                usuario.setCargo(c);
-                usuario.setData_cadastro(rs.getDate("data_cadastro"));
+                usuario.setIdCargo(c);
+                usuario.setDataCadastro(rs.getDate("data_cadastro"));
                 AreaUsuario au = new AreaUsuario();
-                au.setCodigo(rs.getInt("area_usuario.codigo"));
+                au.setId(rs.getInt("area_usuario.codigo"));
                 au.setArea(rs.getString("area_usuario.area"));
-                usuario.setAreaUsuario(au);
+                usuario.setIdAreaUsuario(au);
                 
                 
             }
@@ -311,19 +311,19 @@ public class UsuarioDAOJDBC implements UsuarioDAO {
             pstm.setString(1,nome);
             rs = pstm.executeQuery();
             while (rs.next()) {
-                usuario.setCodigo(rs.getInt("codigo"));
+                usuario.setId(rs.getInt("codigo"));
                 usuario.setNome(rs.getString("nome"));
                 usuario.setLogin(rs.getString("login"));
                 usuario.setSenha(rs.getString("senha"));
                 Cargo c = new Cargo();
-                c.setCodigo(rs.getInt("cargo.codigo"));
+                c.setId(rs.getInt("cargo.codigo"));
                 c.setCargo(rs.getString("cargo.cargo"));
-                usuario.setCargo(c);
-                usuario.setData_cadastro(rs.getDate("data_cadastro"));
+                usuario.setIdCargo(c);
+                usuario.setDataCadastro(rs.getDate("data_cadastro"));
                 AreaUsuario au = new AreaUsuario();
-                au.setCodigo(rs.getInt("area_usuario.codigo"));
+                au.setId(rs.getInt("area_usuario.codigo"));
                 au.setArea(rs.getString("area_usuario.area"));
-                usuario.setAreaUsuario(au);
+                usuario.setIdAreaUsuario(au);
                 
                 
             }
@@ -337,8 +337,33 @@ public class UsuarioDAOJDBC implements UsuarioDAO {
         return usuario;
 
     }
-    
-   
-}
+    public boolean validaLogin(String login, String senha) {
 
-   
+        boolean autenticado = false;
+        //conectar com banco
+        Connection conn = null;
+        //pra enviar alguma coisa pro banco
+        PreparedStatement pstm = null;
+        //receber alguma coisa do banco
+        ResultSet rs;
+        Usuario usuario = new Usuario();
+        try {
+            //conectar com banco
+            conn = FabricaConecta.getConexao();
+            pstm = conn.prepareStatement(VERIFICALOGIN);
+            pstm.setString(1, login);
+            pstm.setString(2, senha);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                return true;
+            }
+
+            FabricaConecta.fecharConexao(conn, pstm, rs);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao validar login e senha: " + e.getMessage());
+        } catch (ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao validar login e senha: " + e.getMessage());
+        }
+        return autenticado;
+    }
+}

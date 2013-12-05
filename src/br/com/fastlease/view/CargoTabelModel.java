@@ -1,6 +1,6 @@
 package br.com.fastlease.view;
 
-import br.com.model.negocio.Cargo;
+import br.com.fastlease.model.Cargo;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -67,7 +67,7 @@ public class CargoTabelModel extends AbstractTableModel {
 
         //verifica qual valor deve ser retornado
         if (column == COL_COD) {
-            return m.getCodigo();
+            return m.getId();
         } else if (column == COL_CARGO) {
             return m.getCargo();
         }
@@ -78,7 +78,7 @@ public class CargoTabelModel extends AbstractTableModel {
         //Seta valores nos campos 
         Cargo u = linhas.get(row);
         if (column == COL_COD) {
-            u.setCodigo((Integer) aValue);
+            u.setId((Integer) aValue);
         } else if (column == COL_CARGO) {
             u.setCargo(aValue.toString());
         }

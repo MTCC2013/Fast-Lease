@@ -1,6 +1,6 @@
 package br.com.fastlease.view;
 
-import br.com.senai.model.Arquetipo;
+import br.com.fastlease.model.Arquetipo;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -107,7 +107,7 @@ public class ArquetipoTableModel extends AbstractTableModel {
 
         // Notifica a mudança.
         fireTableRowsInserted(ultimoIndice, ultimoIndice);
-        ordenarPorNome();
+      
 
     }
     
@@ -115,7 +115,7 @@ public class ArquetipoTableModel extends AbstractTableModel {
             linhas.set(indiceLinha, arquetipo);
         // Notifica a mudança.
         fireTableRowsUpdated(indiceLinha, indiceLinha);
-        ordenarPorNome();
+        
     }
     
     //Remove o sócio da linha especificada.
@@ -125,7 +125,7 @@ public class ArquetipoTableModel extends AbstractTableModel {
 
         // Notifica a mudança.
         fireTableRowsDeleted(indiceLinha, indiceLinha);
-        ordenarPorNome();
+       
     }
 
 // Remove todos os registros.
@@ -137,16 +137,5 @@ public class ArquetipoTableModel extends AbstractTableModel {
         fireTableDataChanged();
     }
     
-    public void ordenarPorNome() {
-        //ordena pelo nome
-        Collections.sort(linhas, new Comparator<Arquetipo>() {
-
-            public int compare(Arquetipo o1, Arquetipo o2) {
-                return o1.getNome().compareTo(o2.getNome());
-            }
-        });
-
-        //avisa que a tabela foi alterada
-        fireTableDataChanged();
-    }
+    
 }

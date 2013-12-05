@@ -1,8 +1,8 @@
 package br.com.fastlease.view;
 
-import br.com.model.negocio.AreaUsuario;
-import br.com.model.negocio.Cargo;
-import br.com.model.negocio.Usuario;
+import br.com.fastlease.model.AreaUsuario;
+import br.com.fastlease.model.Cargo;
+import br.com.fastlease.model.Usuario;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,15 +16,13 @@ public class UsuarioTabelModel extends AbstractTableModel {
 
     //Declara as colunas da tabela
     private static final int COL_COD = 0;
-    private static final int COL_NOME = 1;
-    private static final int COL_LOGIN = 2;
-    private static final int COL_SENHA = 3;
-    private static final int COL_CARGO = 4;
-    private static final int COL_DATACADASTRO = 5;
-    private static final int COL_AREA = 6;
+    private static final int COL_NOME = 1;   
+    private static final int COL_CARGO = 2;
+    private static final int COL_DATACADASTRO = 3;
+    private static final int COL_AREA = 4;
     private List<Usuario> linhas;
     // Array com os nomes das colunas.
-    private String[] colunas = new String[]{"Código", "Nome", "Login", "Senha", "Cargo",
+    private String[] colunas = new String[]{"Código", "Nome", "Cargo",
         "Data Cadastro", "Àrea"};
 
     //Cria uma UsuarioTabelModel sem nenhuma linha
@@ -60,11 +58,7 @@ public class UsuarioTabelModel extends AbstractTableModel {
             return Integer.class;
         } else if (columnIndex == COL_NOME) {
             return String.class;
-        } else if (columnIndex == COL_LOGIN) {
-            return String.class;
-        } else if (columnIndex == COL_SENHA) {
-            return String.class;
-        } else if (columnIndex == COL_CARGO) {
+        }  else if (columnIndex == COL_CARGO) {
             return Cargo.class;
         } else if (columnIndex == COL_DATACADASTRO) {
             return Date.class;
@@ -88,19 +82,15 @@ public class UsuarioTabelModel extends AbstractTableModel {
 
         //verifica qual valor deve ser retornado
         if (column == COL_COD) {
-            return c.getCodigo();
+            return c.getId();
         } else if (column == COL_NOME) {
             return c.getNome();
-        } else if (column == COL_LOGIN) {
-            return c.getLogin();
-        } else if (column == COL_SENHA) {
-            return c.getSenha();
         } else if (column == COL_CARGO) {
-            return c.getCargo();
+            return c.getIdCargo();
         } else if (column == COL_DATACADASTRO) {
-            return c.getData_cadastro();
+            return c.getDataCadastro();
         } else if (column == COL_AREA) {
-            return c.getAreaUsuario();
+            return c.getIdAreaUsuario();
         }
         return "";
     }
@@ -110,19 +100,15 @@ public class UsuarioTabelModel extends AbstractTableModel {
         Usuario c = linhas.get(row);
 
         if (column == COL_COD) {
-            c.setCodigo((Integer) aValue);
+            c.setId((Integer) aValue);
         } else if (column == COL_NOME) {
             c.setNome(aValue.toString());
-        } else if (column == COL_LOGIN) {
-            c.setLogin(aValue.toString());
-        } else if (column == COL_SENHA) {
-            c.setSenha(aValue.toString());
         } else if (column == COL_CARGO) {
-            c.setCargo((Cargo) aValue);
+            c.setIdCargo((Cargo) aValue);
         } else if (column == COL_DATACADASTRO) {
-            c.setData_cadastro((Date) aValue);
+            c.setDataCadastro((Date) aValue);
         } else if (column == COL_AREA) {
-            c.setAreaUsuario((AreaUsuario) aValue);
+            c.setIdAreaUsuario((AreaUsuario) aValue);
         }
     }
 

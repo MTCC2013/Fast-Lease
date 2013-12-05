@@ -6,7 +6,7 @@ package br.com.fastlease.controller;
 
 import br.com.fastlease.dao.UsuarioDAO;
 import br.com.fastlease.dao.UsuarioDAOJDBC;
-import br.com.model.negocio.Usuario;
+import br.com.fastlease.model.Usuario;
 import java.util.List;
 
 /**
@@ -75,5 +75,10 @@ public class UsuarioController {
     public Usuario buscarUsuariobyNom(String nome){
         UsuarioDAO dao = new UsuarioDAOJDBC();
         return dao.getUsuariobyNom(nome);
+    }
+    
+     public boolean validaLogin(String login, String senha) {
+        UsuarioDAO dao = new UsuarioDAOJDBC();
+        return dao.validaLogin(login, senha);
     }
 }

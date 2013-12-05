@@ -1,9 +1,8 @@
 package br.com.fastlease.view;
 
 
-import br.com.senai.controller.*;
-import br.com.senai.model.Bloco;
-import java.awt.Component;
+import br.com.fastlease.controller.*;
+import br.com.fastlease.model.Bloco;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
@@ -20,7 +19,8 @@ public class BlocoLista extends javax.swing.JFrame {
     public BlocoLista() {
         
         initComponents();
-        setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
+        setResizable(false);
+        setLocationRelativeTo(null);
         List<Bloco> lista = new ArrayList<Bloco>();
         BlocoController a = new BlocoController();
         lista = a.buscarBloco();
@@ -47,16 +47,17 @@ public class BlocoLista extends javax.swing.JFrame {
         painelInf = new javax.swing.JPanel();
         painelCabecalhoCliente1 = new javax.swing.JPanel();
         labelCadCliente1 = new javax.swing.JLabel();
-        labelNomeRelFun = new javax.swing.JLabel();
-        cmpNomePesq = new javax.swing.JTextField();
         btExcluir = new javax.swing.JButton();
         btEditar = new javax.swing.JButton();
         btInserir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaBloco = new javax.swing.JTable();
+        jPanel5 = new javax.swing.JPanel();
+        cmpNomePesq = new javax.swing.JTextField();
+        labelNomeRelFun = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Histórico do Funcionário");
+        setTitle("Lista de Blocos");
 
         painelPrincipal.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -94,20 +95,6 @@ public class BlocoLista extends javax.swing.JFrame {
         labelCadCliente1.setText("BLOCOS");
         labelCadCliente1.setToolTipText("");
         labelCadCliente1.setOpaque(true);
-
-        labelNomeRelFun.setForeground(new java.awt.Color(255, 255, 255));
-        labelNomeRelFun.setText("Bloco:");
-
-        cmpNomePesq.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmpNomePesqActionPerformed(evt);
-            }
-        });
-        cmpNomePesq.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                cmpNomePesqKeyPressed(evt);
-            }
-        });
 
         btExcluir.setBackground(new java.awt.Color(255, 255, 255));
         btExcluir.setText("Excluir");
@@ -157,17 +144,13 @@ public class BlocoLista extends javax.swing.JFrame {
             painelCabecalhoCliente1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(painelCabecalhoCliente1Layout.createSequentialGroup()
                 .addContainerGap()
-                .add(labelCadCliente1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 244, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(66, 66, 66)
+                .add(labelCadCliente1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 211, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(btExcluir)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(btEditar)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(btInserir)
-                .add(30, 30, 30)
-                .add(labelNomeRelFun)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(cmpNomePesq, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
                 .addContainerGap())
         );
         painelCabecalhoCliente1Layout.setVerticalGroup(
@@ -178,23 +161,61 @@ public class BlocoLista extends javax.swing.JFrame {
             .add(painelCabecalhoCliente1Layout.createSequentialGroup()
                 .addContainerGap()
                 .add(painelCabecalhoCliente1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(labelNomeRelFun, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(cmpNomePesq, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(btExcluir)
                     .add(btEditar)
                     .add(btInserir))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tabelaBloco.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {"01", "I - Prédio Principal", "4"},
+                {"02", "II - Cerâmica", "1"},
+                {"03", "III - Piloto", "1"},
+                {null, null, null}
             },
             new String [] {
-                "", "Title 2", "Title 3", "Title 4"
+                "Código", "Nome", "Qtde de Pisos"
             }
         ));
         jScrollPane1.setViewportView(tabelaBloco);
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar"));
+
+        cmpNomePesq.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmpNomePesqActionPerformed(evt);
+            }
+        });
+        cmpNomePesq.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cmpNomePesqKeyPressed(evt);
+            }
+        });
+
+        labelNomeRelFun.setText("Bloco:");
+
+        org.jdesktop.layout.GroupLayout jPanel5Layout = new org.jdesktop.layout.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(labelNomeRelFun)
+                .add(18, 18, 18)
+                .add(cmpNomePesq, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(cmpNomePesq, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(labelNomeRelFun, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
 
         org.jdesktop.layout.GroupLayout painelPrincipalLayout = new org.jdesktop.layout.GroupLayout(painelPrincipal);
         painelPrincipal.setLayout(painelPrincipalLayout);
@@ -205,9 +226,11 @@ public class BlocoLista extends javax.swing.JFrame {
             .add(painelPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(painelPrincipalLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(painelCabecalhoCliente1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(jScrollPane1))
-                .addContainerGap())
+                    .add(painelPrincipalLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                        .add(painelCabecalhoCliente1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE))
+                    .add(jPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         painelPrincipalLayout.setVerticalGroup(
             painelPrincipalLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -216,8 +239,10 @@ public class BlocoLista extends javax.swing.JFrame {
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(painelCabecalhoCliente1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 390, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 17, Short.MAX_VALUE)
+                .add(jPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 104, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(painelInf, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -251,19 +276,26 @@ public class BlocoLista extends javax.swing.JFrame {
      * @param evt
      */
     private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
-
-        int selecionado = -1;
+int selecionado = -1;
         selecionado = tabelaBloco.getSelectedRow();
 
-        if (selecionado >= 0) {
-            Integer i = (Integer) model.getValueAt(selecionado, 0);
-            BlocoController mc = new BlocoController();
-            mc.remover(i);
-            model.removeBloco(selecionado);
+        String message = "Você tem certeza que deseja excluir?";
+        String title = "Deseja sair?";
+        int condicao = JOptionPane.showConfirmDialog(null, message, title, JOptionPane.YES_NO_OPTION);
+        if (condicao == JOptionPane.YES_OPTION) {
 
-        } else {
-            JOptionPane.showMessageDialog(null, "É necesário selecionar uma tabela");
+            if (selecionado >= 0) {
+                Integer i = (Integer) model.getValueAt(selecionado, 0);
+                BlocoController cc = new BlocoController();
+                cc.remover(i);
+                model.removeBloco(selecionado);
+                JOptionPane.showMessageDialog(null, "Bloco excluido com sucesso");
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "É necessário selecionar uma linha");
+            }
         }
+
 
     }//GEN-LAST:event_btExcluirActionPerformed
 
@@ -327,6 +359,7 @@ public class BlocoLista extends javax.swing.JFrame {
     private javax.swing.JButton btExcluir;
     private javax.swing.JButton btInserir;
     private javax.swing.JTextField cmpNomePesq;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelCadCliente1;
     private javax.swing.JLabel labelNomeRelFun;

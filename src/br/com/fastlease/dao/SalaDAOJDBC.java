@@ -1,9 +1,9 @@
 //Pacotes
 package br.com.fastlease.dao;
 //Importações
-import br.com.senai.dao.FabricaConexao;
-import br.com.senai.model.Bloco;
-import br.com.senai.model.Sala;
+import br.com.fastlease.model.Arquetipo;
+import br.com.fastlease.model.Bloco;
+import br.com.fastlease.model.Sala;
 import java.sql.*;
 import java.util.*;
 import javax.swing.JOptionPane;
@@ -16,16 +16,16 @@ import javax.swing.JOptionPane;
  */
 public class SalaDAOJDBC implements SalaDAO {
 
-    private final String INSERT = "INSERT INTO SALA (nome,arquetipo,id_bloco,qnt_piso,obs,id_software)VALUES(?,?,?,?,?,?)";
-    private final String DELETE = "DELETE FROM SALA where id = ?";
-    private final String UPDATE = "UPDATE sala SET nome = ?,arquetipo = ?,id_bloco = ?,qnt_piso = ?,obs = ?,id_software = ? where id = ?";
-    private final String LIST = "select * from sala";
-    private final String LIST_NOME = "select * from sala where nome like ?";
-    private final String LIST_ID = "select * from sala where id = ?";
-    
+    private final String INSERT = "INSERT INTO SALA (nome,id_arquetipo,id_bloco, piso,obs)VALUES(?,?,?,?,?)";
+    private final String DELETE = "DELETE FROM SALA where codigo = ?";
+    private final String UPDATE = "UPDATE sala SET nome = ?, id_arquetipo = ?,id_bloco = ?, piso = ?,obs = ? where codigo = ?";
+    private final String LIST = "select * from sala, bloco, arquetipo where sala.id_bloco = bloco.codigo and sala.id_arquetipo = arquetipo.codigo";
+    private final String LIST_NOME = "select * from sala, arquetipo, bloco where sala.id_bloco = bloco.codigo and sala.id_arquetipo = arquetipo.codigo and sala.nome like ?";
+    private final String LIST_ID = "select * from sala, arquetipo, bloco where sala.id_arquetipo = arquetipo.codigo and sala.id_bloco = bloco.codigo and sala.codigo = ?";
+    private final String LIST_NOM = "select * from sala, arquetipo, bloco where sala.id_arquetipo = arquetipo.codigo and sala.id_bloco = bloco.codigo and sala.nome = ?";
 
     /**
-     * Método que faz a inserção de pessoas na base de dados
+     * Método que faz a inserção de salas na base de dados
      *
      * @param sala
      */
@@ -33,24 +33,24 @@ public class SalaDAOJDBC implements SalaDAO {
         if (sala != null) {
             Connection conn = null;
             try {
-                conn = FabricaConexao.getConexao();
+                conn = FabricaConecta.getConexao();
                 PreparedStatement pstm = null;
-                pstm = FabricaConexao.getConexao().prepareStatement(INSERT);
+                pstm = FabricaConecta.getConexao().prepareStatement(INSERT);
                 //Pega os dados que estão no objeto passado por parametro e coloca na instrução de retorno 
 
                 pstm.setString(1, sala.getNome());
-                pstm.setString(2, sala.getArquetipo());
+                pstm.setInt(2, sala.getIdArquetipo().getId());
                 pstm.setInt(3, sala.getIdBloco().getId());
-                pstm.setInt(4, sala.getPiso());
+                pstm.setString(4, sala.getPiso());
                 pstm.setString(5, sala.getObs());
 
                 //Executa o comando sql
                 pstm.execute();
                 JOptionPane.showMessageDialog(null, "O sala foi cadastrada com sucesso!");
-                FabricaConexao.fecharConexao(conn, pstm);
+                FabricaConecta.fecharConexao(conn, pstm);
 
             } catch (SQLException e) {
-                System.out.println("Erro ao inserir pessoa no banco de dados\n" + e.getMessage());
+                System.out.println("Erro ao inserir sala no banco de dados\n" + e.getMessage());
             } catch (ClassNotFoundException e) {
                 System.out.println("Erro com o driver de conexão" + e.getMessage());
             }
@@ -58,7 +58,7 @@ public class SalaDAOJDBC implements SalaDAO {
     }
 
     /**
-     * Método que faz a atualização de pessoas na base de dados
+     * Método que faz a atualização de salas na base de dados
      *
      * @param sala
      */
@@ -67,26 +67,26 @@ public class SalaDAOJDBC implements SalaDAO {
         Connection conn = null;
         if (sala != null) {
             try {
-                conn = FabricaConexao.getConexao();
+                conn = FabricaConecta.getConexao();
                 PreparedStatement pstm = null;
-                pstm = FabricaConexao.getConexao().prepareStatement(UPDATE);
+                pstm = FabricaConecta.getConexao().prepareStatement(UPDATE);
                 //Pega os dados que estão no objeto passado por parametro e coloca na instrução de retorno 
                 
                 pstm.setString(1, sala.getNome());
-                pstm.setString(2, sala.getArquetipo());
+                pstm.setInt(2, sala.getIdArquetipo().getId());
                 pstm.setInt(3, sala.getIdBloco().getId());
-                pstm.setInt(4, sala.getPiso());
+                pstm.setString(4, sala.getPiso());
                 pstm.setString(5, sala.getObs());
-                pstm.setInt(7, sala.getId());
+                pstm.setInt(6, sala.getId());
                 //Executa o comando sql
                 pstm.execute();
                 //Mensagem na tela                
                 JOptionPane.showMessageDialog(null, "O sala foi atualizada com sucesso!");
                 //Fecha conexão
-                FabricaConexao.fecharConexao(conn, pstm);
+                FabricaConecta.fecharConexao(conn, pstm);
 
             } catch (SQLException e) {
-                System.out.println("Erro ao atualizar pessoa no banco de dados\n" + e.getMessage());
+                System.out.println("Erro ao atualizar sala no banco de dados\n" + e.getMessage());
             } catch (ClassNotFoundException e) {
                 System.out.println("Erro com o driver de conexão" + e.getMessage());
             }
@@ -94,7 +94,7 @@ public class SalaDAOJDBC implements SalaDAO {
     }
 
     /**
-     * Método que faz a remoção de pessoas na base de dados
+     * Método que faz a remoção de salas na base de dados
      *
      * @param sala
      */
@@ -102,9 +102,9 @@ public class SalaDAOJDBC implements SalaDAO {
 
         Connection conn = null;
         try {
-            conn = FabricaConexao.getConexao();
+            conn = FabricaConecta.getConexao();
             PreparedStatement pstm = null;
-            pstm = FabricaConexao.getConexao().prepareStatement(DELETE);
+            pstm = FabricaConecta.getConexao().prepareStatement(DELETE);
             String mensagem = "Você tem certeza que deseja excluir este funcionário?";
             String titulo = "Atenção!";
 
@@ -115,11 +115,11 @@ public class SalaDAOJDBC implements SalaDAO {
                 //Executa o comando sql
                 pstm.execute();
                 JOptionPane.showMessageDialog(null, "O funcionário foi removido com sucesso!");
-                FabricaConexao.fecharConexao(conn, pstm);
+                FabricaConecta.fecharConexao(conn, pstm);
             }
 
         } catch (SQLException e) {
-            System.out.println("Erro ao deletar pessoa no banco de dados\n" + e.getMessage());
+            System.out.println("Erro ao deletar sala no banco de dados\n" + e.getMessage());
         } catch (ClassNotFoundException e) {
             System.out.println("Erro com o driver de conexão" + e.getMessage());
         }
@@ -128,7 +128,7 @@ public class SalaDAOJDBC implements SalaDAO {
     }
 
     /**
-     * Método que faz a lista de todas as pessoas da base de dados
+     * Método que faz a lista de todas as salas da base de dados
      *
      * @return sala
      */
@@ -139,34 +139,37 @@ public class SalaDAOJDBC implements SalaDAO {
         PreparedStatement pstm = null;
         //tras do banco
         ResultSet rs;
-        List<Sala> sala = new ArrayList<Sala>();
+        List<Sala> salas = new ArrayList<Sala>();
 
         try {
-            conn = (Connection) FabricaConexao.getConexao();
+            conn = (Connection) FabricaConecta.getConexao();
             pstm = conn.prepareStatement(LIST);
             rs = pstm.executeQuery();
             while (rs.next()) {
-                Sala pessoa = new Sala();
-                pessoa.setId(rs.getInt("id"));
-                pessoa.setNome(rs.getString("nome"));
-                pessoa.setArquetipo(rs.getString("arquetipo"));
+                Sala sala = new Sala();
+                sala.setId(rs.getInt("codigo"));
+                sala.setNome(rs.getString("nome"));
+                Arquetipo ar = new Arquetipo();
+                ar.setId(rs.getInt("arquetipo.codigo"));
+                ar.setNome(rs.getString("arquetipo.nome"));
+                sala.setIdArquetipo(ar);                
                 Bloco b = new Bloco();
-                b.setId(rs.getInt("bloco.id"));
-                b.setNome(rs.getString("bloco.nome"));
+                b.setId(rs.getInt("bloco.codigo"));
+                b.setNome(rs.getString("bloco.bloco"));
                 b.setQntPiso(rs.getInt("bloco.qnt_piso"));
-                pessoa.setIdBloco(b);
-                pessoa.setPiso(rs.getInt("qnt_piso"));
-                pessoa.setObs(rs.getString("obs"));
-                sala.add(pessoa);
+                sala.setIdBloco(b);
+                sala.setPiso(rs.getString("piso"));
+                sala.setObs(rs.getString("obs"));
+                salas.add(sala);
             }
-            FabricaConexao.fecharConexao(conn, pstm, rs);
+            FabricaConecta.fecharConexao(conn, pstm, rs);
         } catch (SQLException e) {
-            System.out.println("Erro ao listar pessoas: " + e.getMessage());
+            System.out.println("Erro ao listar salas: " + e.getMessage());
 
         } catch (ClassNotFoundException e) {
-            System.out.println("Erro ao listar pessoas: " + e.getMessage());
+            System.out.println("Erro ao listar salas: " + e.getMessage());
         }
-        return sala;
+        return salas;
     }
 
     /**
@@ -182,35 +185,38 @@ public class SalaDAOJDBC implements SalaDAO {
         PreparedStatement pstm = null;
         //tras do banco
         ResultSet rs;
-        List<Sala> pessoas = new ArrayList<Sala>();
+        List<Sala> salas = new ArrayList<Sala>();
         try {
-            conn = (Connection) FabricaConexao.getConexao();
+            conn = (Connection) FabricaConecta.getConexao();
             pstm = conn.prepareStatement(LIST_NOME);
             pstm.setString(1, "%" + nome + "%");
             rs = pstm.executeQuery();
             while (rs.next()) {
-                Sala pessoa = new Sala();
-                pessoa.setId(rs.getInt("id"));
-                pessoa.setNome(rs.getString("nome"));
-                pessoa.setArquetipo(rs.getString("arquetipo"));
+                Sala sala = new Sala();
+                sala.setId(rs.getInt("codigo"));
+                sala.setNome(rs.getString("nome"));
+                Arquetipo a = new Arquetipo();
+                a.setId(rs.getInt("arquetipo.codigo"));
+                a.setNome(rs.getString("arquetipo.nome"));
+                sala.setIdArquetipo(a);
                 Bloco b = new Bloco();
-                b.setId(rs.getInt("bloco.id"));
-                b.setNome(rs.getString("bloco.nome"));
+                b.setId(rs.getInt("bloco.codigo"));
+                b.setNome(rs.getString("bloco.bloco"));
                 b.setQntPiso(rs.getInt("bloco.qnt_piso"));
-                pessoa.setIdBloco(b);
-                pessoa.setPiso(rs.getInt("qnt_piso"));
-                pessoa.setObs(rs.getString("obs"));
+                sala.setIdBloco(b);
+                sala.setPiso(rs.getString("piso"));
+                sala.setObs(rs.getString("obs"));
                 
-                pessoas.add(pessoa);
+                salas.add(sala);
             }
-            FabricaConexao.fecharConexao(conn, pstm, rs);
+            FabricaConecta.fecharConexao(conn, pstm, rs);
         } catch (SQLException e) {
-            System.out.println("Erro ao listar pessoas: " + e.getMessage());
+            System.out.println("Erro ao listar salas: " + e.getMessage());
 
         } catch (ClassNotFoundException e) {
-            System.out.println("Erro ao listar pessoas: " + e.getMessage());
+            System.out.println("Erro ao listar salas: " + e.getMessage());
         }
-        return pessoas;
+        return salas;
 
     }
 
@@ -227,35 +233,80 @@ public class SalaDAOJDBC implements SalaDAO {
         PreparedStatement pstm = null;
         //tras do banco
         ResultSet rs;
-        Sala pessoa = new Sala();
+        Sala sala = new Sala();
 
         try {
-            conn = (Connection) FabricaConexao.getConexao();
+            conn = (Connection) FabricaConecta.getConexao();
             pstm = conn.prepareStatement(LIST_ID);
             pstm.setInt(1, id);
             rs = pstm.executeQuery();
             while (rs.next()) {
-                pessoa.setId(rs.getInt("id"));
-                pessoa.setNome(rs.getString("nome"));
-                pessoa.setArquetipo(rs.getString("arquetipo"));
+                sala.setId(rs.getInt("codigo"));
+                sala.setNome(rs.getString("nome"));
+                 Arquetipo a = new Arquetipo();
+                a.setId(rs.getInt("arquetipo.codigo"));
+                a.setNome(rs.getString("arquetipo.nome"));
+                sala.setIdArquetipo(a);
                 Bloco b = new Bloco();
-                b.setId(rs.getInt("bloco.id"));
-                b.setNome(rs.getString("bloco.nome"));
+                b.setId(rs.getInt("bloco.codigo"));
+                b.setNome(rs.getString("bloco.bloco"));
                 b.setQntPiso(rs.getInt("bloco.qnt_piso"));
-                pessoa.setIdBloco(b);
-                pessoa.setPiso(rs.getInt("qnt_piso"));
-                pessoa.setObs(rs.getString("obs"));
+                sala.setIdBloco(b);
+                sala.setPiso(rs.getString("piso"));
+                sala.setObs(rs.getString("obs"));
                 
             }
-            FabricaConexao.fecharConexao(conn, pstm, rs);
+            FabricaConecta.fecharConexao(conn, pstm, rs);
         } catch (SQLException e) {
-            System.out.println("Erro ao listar pessoas: " + e.getMessage());
+            System.out.println("Erro ao listar salas: " + e.getMessage());
 
         } catch (ClassNotFoundException e) {
-            System.out.println("Erro ao listar pessoas: " + e.getMessage());
+            System.out.println("Erro ao listar salas: " + e.getMessage());
         }
-        return pessoa;
+        return sala;
 
+    }
+
+
+    public Sala getSalabyNom(String nome) {
+         //Abre e fecha conexao
+        Connection conn = null;
+        //envia p banco
+        PreparedStatement pstm = null;
+        //tras do banco
+        ResultSet rs;
+        Sala sala = new Sala();
+
+        try {
+            conn = (Connection) FabricaConecta.getConexao();
+            pstm = conn.prepareStatement(LIST_NOM);
+            pstm.setString(1, nome);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                sala.setId(rs.getInt("codigo"));
+                sala.setNome(rs.getString("nome"));
+                 Arquetipo a = new Arquetipo();
+                a.setId(rs.getInt("arquetipo.codigo"));
+                a.setNome(rs.getString("arquetipo.nome"));
+                sala.setIdArquetipo(a);
+                Bloco b = new Bloco();
+                b.setId(rs.getInt("bloco.codigo"));
+                b.setNome(rs.getString("bloco.bloco"));
+                b.setQntPiso(rs.getInt("bloco.qnt_piso"));
+                sala.setIdBloco(b);
+                sala.setPiso(rs.getString("piso"));
+                sala.setObs(rs.getString("obs"));
+                
+            }
+            FabricaConecta.fecharConexao(conn, pstm, rs);
+        } catch (SQLException e) {
+            System.out.println("Erro ao listar salas: " + e.getMessage());
+
+        } catch (ClassNotFoundException e) {
+            System.out.println("Erro ao listar salas: " + e.getMessage());
+        }
+        return sala;
+       
     }
 
 

@@ -1,10 +1,8 @@
 //Pacote controller
 package br.com.fastlease.controller;
 //Importações
-import br.com.senai.dao.*;
-import br.com.senai.model.Arquetipo;
-import br.com.senai.model.Bloco;
-import java.util.ArrayList;
+import br.com.fastlease.dao.*;
+import br.com.fastlease.model.Bloco;
 import java.util.List;
 
 /**

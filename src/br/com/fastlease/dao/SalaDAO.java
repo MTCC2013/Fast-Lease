@@ -1,7 +1,6 @@
 package br.com.fastlease.dao;
 
-import br.com.senai.model.Sala;
-import java.util.ArrayList;
+import br.com.fastlease.model.Sala;
 import java.util.List;
 
 /**
@@ -49,5 +48,6 @@ public interface SalaDAO{
      */
     Sala getSalabyId(Integer id);
     
+    Sala getSalabyNom(String nome);
        
 }

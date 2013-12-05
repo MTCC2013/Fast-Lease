@@ -7,15 +7,15 @@ package br.com.fastlease.model;
  * @version 1.0 21/09/2013
  */
 public class Cargo {
-    private int codigo;
+    private int id;
     private String cargo;
 
-    public int getCodigo() {
-        return codigo;
+    public int getId() {
+        return id;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getCargo() {

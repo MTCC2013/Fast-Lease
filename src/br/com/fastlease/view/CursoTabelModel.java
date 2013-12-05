@@ -1,7 +1,7 @@
 package br.com.fastlease.view;
 
-import br.com.model.negocio.Categoria;
-import br.com.model.negocio.Curso;
+import br.com.fastlease.model.Categoria;
+import br.com.fastlease.model.Curso;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -80,7 +80,7 @@ public class CursoTabelModel extends AbstractTableModel {
 
         //verifica qual valor deve ser retornado
         if (column == COL_COD) {
-            return c.getCodigo();
+            return c.getId();
         } else if (column == COL_CURSO) {
             return c.getCurso();
         } else if (column == COL_FASE) {
@@ -90,7 +90,7 @@ public class CursoTabelModel extends AbstractTableModel {
         } else if (column == COL_DATATERMINO) {
             return c.getDataTermino();
         } else if (column == COL_CATEGORIA) {
-            return c.getCategoria();
+            return c.getIdCategoria();
         }
         return "";
     }
@@ -99,7 +99,7 @@ public class CursoTabelModel extends AbstractTableModel {
         //Seta valor as colunas
         Curso c = linhas.get(row);
         if (column == COL_COD) {
-            c.setCodigo((Integer) aValue);
+            c.setId((Integer) aValue);
         } else if (column == COL_CURSO) {
             c.setCurso(aValue.toString());
         } else if (column == COL_FASE) {
@@ -109,7 +109,7 @@ public class CursoTabelModel extends AbstractTableModel {
         } else if (column == COL_DATATERMINO) {
             c.setDataTermino((Date) aValue);
         } else if (column == COL_CATEGORIA) {
-            c.setCategoria((Categoria) aValue);
+            c.setIdCategoria((Categoria) aValue);
         }
     }
 

@@ -13,9 +13,9 @@ public class Usuario {
     private String nome;
     private String login;
     private String senha;
-    private Cargo cargo;
-    private Date data_cadastro;
-    private AreaUsuario areaUsuario;
+    private Cargo idCargo;
+    private Date dataCadastro;
+    private AreaUsuario idAreaUsuario;
     
 
     public int getId() {
@@ -49,31 +49,34 @@ public class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-   
-    public Date getData_cadastro() {
-        return data_cadastro;
+
+    public Date getDataCadastro() {
+        return dataCadastro;
     }
 
-    public void setData_cadastro(Date data_cadastro) {
-        this.data_cadastro = data_cadastro;
+    public void setDataCadastro(Date dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
+      
+    public Cargo getIdCargo() {
+        return idCargo;
     }
 
-    public Cargo getCargo() {
-        return cargo;
+    public void setIdCargo(Cargo idCargo) {
+        this.idCargo = idCargo;
     }
 
-    public void setCargo(Cargo cargo) {
-        this.cargo = cargo;
+    public AreaUsuario getIdAreaUsuario() {
+        return idAreaUsuario;
     }
 
-    public AreaUsuario getAreaUsuario() {
-        return areaUsuario;
+    public void setIdAreaUsuario(AreaUsuario idAreaUsuario) {
+        this.idAreaUsuario = idAreaUsuario;
     }
-
-    public void setAreaUsuario(AreaUsuario areaUsuario) {
-        this.areaUsuario = areaUsuario;
+   @Override
+    public String toString() {
+        return this.nome;
     }
-   
     
     
 }

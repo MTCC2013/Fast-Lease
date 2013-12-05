@@ -24,7 +24,7 @@ public interface ArquetipoDAO{
 
     /**
      * Método que remove uma pessoa da base de dados
-     * @param arquetipo
+     * @param id
      */
     void remover(int id);
 

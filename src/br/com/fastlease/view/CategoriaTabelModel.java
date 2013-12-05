@@ -1,6 +1,6 @@
 package br.com.fastlease.view;
 
-import br.com.model.negocio.Categoria;
+import br.com.fastlease.model.Categoria;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -67,7 +67,7 @@ public class CategoriaTabelModel extends AbstractTableModel {
 
         //verifica qual valor deve ser retornado
         if (column == COL_COD) {
-            return m.getCodigo();
+            return m.getId();
         } else if (column == COL_CATEGORIA) {
             return m.getCategoria();
         }
@@ -79,7 +79,7 @@ public class CategoriaTabelModel extends AbstractTableModel {
         //Note que vc poderia alterar 2 campos ao invés de um só.  
         Categoria u = linhas.get(row);
         if (column == COL_COD) {
-            u.setCodigo((Integer) aValue);
+            u.setId((Integer) aValue);
         } else if (column == COL_CATEGORIA) {
             u.setCategoria(aValue.toString());
         }

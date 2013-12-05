@@ -6,7 +6,7 @@ package br.com.fastlease.controller;
 
 import br.com.fastlease.dao.AreaUsuarioDAO;
 import br.com.fastlease.dao.AreaUsuarioDAOJDBC;
-import br.com.model.negocio.AreaUsuario;
+import br.com.fastlease.model.AreaUsuario;
 import java.util.List;
 
 /**

@@ -4,7 +4,7 @@
  */
 package br.com.fastlease.dao;
 
-import br.com.model.negocio.Categoria;
+import br.com.fastlease.model.Categoria;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -84,7 +84,7 @@ public class CategoriaDAOJDBC implements CategoriaDAO {
                 // Pega os dados que estão no objeto passado parametro e 
                 //coloca na instrução de retorno
                 pstm.setString(1, categoria.getCategoria());
-                pstm.setInt(2,categoria.getCodigo());
+                pstm.setInt(2,categoria.getId());
                 //Executa o comando sql.
                 pstm.execute();
                 JOptionPane.showMessageDialog(null, "A categoria foi atualizada com sucesso!");
@@ -153,7 +153,7 @@ public class CategoriaDAOJDBC implements CategoriaDAO {
             rs = pstm.executeQuery();
             while (rs.next()) {
                 Categoria categoria = new Categoria();
-                categoria.setCodigo(rs.getInt("codigo"));
+                categoria.setId(rs.getInt("codigo"));
                 categoria.setCategoria(rs.getString("categoria"));
                 categorias.add(categoria);
             }
@@ -189,7 +189,7 @@ public class CategoriaDAOJDBC implements CategoriaDAO {
             rs = pstm.executeQuery();
             while (rs.next()) {
                 Categoria carg = new Categoria();
-                carg.setCodigo(rs.getInt("codigo"));
+                carg.setId(rs.getInt("codigo"));
                 carg.setCategoria(rs.getString("categoria"));
                 categorias.add(carg);
             }
@@ -223,7 +223,7 @@ public class CategoriaDAOJDBC implements CategoriaDAO {
             pstm.setInt(1,codigo);
             rs = pstm.executeQuery();
             while (rs.next()) {
-                categoria.setCodigo(rs.getInt("codigo"));
+                categoria.setId(rs.getInt("codigo"));
                 categoria.setCategoria(rs.getString("categoria"));
                
                              
@@ -254,7 +254,7 @@ public class CategoriaDAOJDBC implements CategoriaDAO {
             pstm.setString(1,nome);
             rs = pstm.executeQuery();
             while (rs.next()) {
-                categoria.setCodigo(rs.getInt("codigo"));
+                categoria.setId(rs.getInt("codigo"));
                 categoria.setCategoria(rs.getString("categoria"));
                
                              

@@ -1,9 +1,8 @@
 //Pacote controller
 package br.com.fastlease.controller;
 //Importações
-import br.com.senai.dao.*;
-import br.com.senai.model.Sala;
-import java.util.ArrayList;
+import br.com.fastlease.dao.*;
+import br.com.fastlease.model.Sala;
 import java.util.List;
 
 /**
@@ -82,6 +81,10 @@ public class SalaController{
         return (Sala) dao.getSalabyId(id);
     }
     
+    public Sala buscarSalabyNom(String nome) {
+        SalaDAO dao = new SalaDAOJDBC();
+        return (Sala) dao.getSalabyNom(nome);
+    }
     
 }
 

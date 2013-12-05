@@ -2,7 +2,7 @@
 package br.com.fastlease.controller;
 //Importações
 import br.com.fastlease.dao.*;
-import br.com.senai.fastlease.Arquetipo;
+import br.com.fastlease.model.Arquetipo;
 import java.util.List;
 
 /**

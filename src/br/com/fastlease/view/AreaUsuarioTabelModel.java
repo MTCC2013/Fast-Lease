@@ -1,6 +1,6 @@
 package br.com.fastlease.view;
 
-import br.com.model.negocio.AreaUsuario;
+import br.com.fastlease.model.AreaUsuario;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -67,7 +67,7 @@ public class AreaUsuarioTabelModel extends AbstractTableModel {
 
         //verifica qual valor deve ser retornado
         if (column == COL_COD) {
-            return m.getCodigo();
+            return m.getId();
         } else if (column == COL_AREA) {
             return m.getArea();
         }
@@ -78,7 +78,7 @@ public class AreaUsuarioTabelModel extends AbstractTableModel {
         // Seta os valores as colunas 
         AreaUsuario u = linhas.get(row);
         if (column == COL_COD) {
-            u.setCodigo((Integer) aValue);
+            u.setId((Integer) aValue);
         } else if (column == COL_AREA) {
             u.setArea(aValue.toString());
         }

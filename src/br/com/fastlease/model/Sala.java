@@ -9,9 +9,9 @@ public class Sala{
 
     private int id;
     private String nome;
-    private String arquetipo;
+    private Arquetipo idArquetipo;
     private Bloco idBloco;    
-    private int piso;
+    private String piso;
     private String obs;
       
        
@@ -32,22 +32,23 @@ public class Sala{
         this.nome = nome;
     }
 
-    public String getArquetipo() {
-        return arquetipo;
+    public Arquetipo getIdArquetipo() {
+        return idArquetipo;
     }
 
-    public void setArquetipo(String arquetipo) {
-        this.arquetipo = arquetipo;
+    public void setIdArquetipo(Arquetipo idArquetipo) {
+        this.idArquetipo = idArquetipo;
     }
 
-    public int getPiso() {
+    public String getPiso() {
         return piso;
     }
 
-    public void setPiso(int piso) {
+    public void setPiso(String piso) {
         this.piso = piso;
     }
-    
+
+
     public String getObs() {
         return obs;
     }

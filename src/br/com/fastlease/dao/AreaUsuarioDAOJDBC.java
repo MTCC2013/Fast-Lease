@@ -4,7 +4,8 @@
  */
 package br.com.fastlease.dao;
 
-import br.com.model.negocio.AreaUsuario;
+
+import br.com.fastlease.model.AreaUsuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -85,7 +86,7 @@ public class AreaUsuarioDAOJDBC implements AreaUsuarioDAO {
                 // Pega os dados que estão no objeto passado parametro e 
                 //coloca na instrução de retorno
                 pstm.setString(1, usuario.getArea());
-                pstm.setInt(2,usuario.getCodigo());
+                pstm.setInt(2,usuario.getId());
                 //Executa o comando sql.
                 pstm.execute();
                 JOptionPane.showMessageDialog(null, "A área foi atualizada com sucesso!");
@@ -154,7 +155,7 @@ public class AreaUsuarioDAOJDBC implements AreaUsuarioDAO {
             rs = pstm.executeQuery();
             while (rs.next()) {
                 AreaUsuario usuario = new AreaUsuario();
-                usuario.setCodigo(rs.getInt("codigo"));
+                usuario.setId(rs.getInt("codigo"));
                 usuario.setArea(rs.getString("area"));
                 usuarios.add(usuario);
             }
@@ -190,7 +191,7 @@ public class AreaUsuarioDAOJDBC implements AreaUsuarioDAO {
             rs = pstm.executeQuery();
             while (rs.next()) {
                 AreaUsuario usuario = new AreaUsuario();
-                usuario.setCodigo(rs.getInt("codigo"));
+                usuario.setId(rs.getInt("codigo"));
                 usuario.setArea(rs.getString("area"));
                 usuarios.add(usuario);
             }
@@ -224,7 +225,7 @@ public class AreaUsuarioDAOJDBC implements AreaUsuarioDAO {
             pstm.setInt(1,codigo);
             rs = pstm.executeQuery();
             while (rs.next()) {
-                usuario.setCodigo(rs.getInt("codigo"));
+                usuario.setId(rs.getInt("codigo"));
                 usuario.setArea(rs.getString("area"));
             }
             FabricaConecta.fecharConexao(conn, pstm, rs);
@@ -253,7 +254,7 @@ public class AreaUsuarioDAOJDBC implements AreaUsuarioDAO {
             pstm.setString(1,nome);
             rs = pstm.executeQuery();
             while (rs.next()) {
-                usuario.setCodigo(rs.getInt("codigo"));
+                usuario.setId(rs.getInt("codigo"));
                 usuario.setArea(rs.getString("area"));
             }
             FabricaConecta.fecharConexao(conn, pstm, rs);

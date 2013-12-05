@@ -6,7 +6,7 @@ package br.com.fastlease.controller;
 
 import br.com.fastlease.dao.CursoDAO;
 import br.com.fastlease.dao.CursoDAOJDBC;
-import br.com.model.negocio.Curso;
+import br.com.fastlease.model.Curso;
 import java.util.List;
 
 /**
@@ -76,4 +76,6 @@ public class CursoController {
         CursoDAO dao = new CursoDAOJDBC();
         return dao.getCursobyNom(nome);
     }
+    
+    
 }

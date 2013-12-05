@@ -1,8 +1,8 @@
 //Pacotes
 package br.com.fastlease.dao;
 //Importações
-import br.com.senai.dao.FabricaConexao;
-import br.com.senai.model.Bloco;
+import br.com.fastlease.dao.FabricaConecta;
+import br.com.fastlease.model.Bloco;
 import java.sql.*;
 import java.util.*;
 import javax.swing.JOptionPane;
@@ -15,17 +15,17 @@ import javax.swing.JOptionPane;
  */
 public class BlocoDAOJDBC implements BlocoDAO {
 
-    private final String INSERT = "INSERT INTO BLOCO (nome)VALUES(?)";
-    private final String DELETE = "DELETE FROM BLOCO where id = ?";
-    private final String UPDATE = "UPDATE bloco SET nome = ? where id = ?";
+    private final String INSERT = "INSERT INTO BLOCO (bloco, qnt_piso)VALUES(?,?)";
+    private final String DELETE = "DELETE FROM BLOCO where codigo = ?";
+    private final String UPDATE = "UPDATE bloco SET bloco = ?, qnt_piso = ? where codigo = ?";
     private final String LIST = "select * from bloco";
-    private final String LIST_NOME = "select * from bloco where nome like ?";
-    private final String LIST_ID = "select * from bloco where id = ?";
-    private final String LIST_NOM = "select * from bloco where nome = ?";
+    private final String LIST_NOME = "select * from bloco where bloco like ?";
+    private final String LIST_ID = "select * from bloco where codigo = ?";
+    private final String LIST_NOM = "select * from bloco where bloco = ?";
     
 
     /**
-     * Método que faz a inserção de pessoas na base de dados
+     * Método que faz a inserção de blocos na base de dados
      *
      * @param bloco
      */
@@ -33,20 +33,21 @@ public class BlocoDAOJDBC implements BlocoDAO {
         if (bloco != null) {
             Connection conn = null;
             try {
-                conn = FabricaConexao.getConexao();
+                conn = FabricaConecta.getConexao();
                 PreparedStatement pstm = null;
-                pstm = FabricaConexao.getConexao().prepareStatement(INSERT);
+                pstm = FabricaConecta.getConexao().prepareStatement(INSERT);
                 //Pega os dados que estão no objeto passado por parametro e coloca na instrução de retorno 
 
                 pstm.setString(1, bloco.getNome());
+                pstm.setInt(2, bloco.getQntPiso());              
 
                 //Executa o comando sql
                 pstm.execute();
                 JOptionPane.showMessageDialog(null, "O bloco foi cadastrado com sucesso!");
-                FabricaConexao.fecharConexao(conn, pstm);
+                FabricaConecta.fecharConexao(conn, pstm);
 
             } catch (SQLException e) {
-                System.out.println("Erro ao inserir pessoa no banco de dados\n" + e.getMessage());
+                System.out.println("Erro ao inserir bloco no banco de dados\n" + e.getMessage());
             } catch (ClassNotFoundException e) {
                 System.out.println("Erro com o driver de conexão" + e.getMessage());
             }
@@ -54,7 +55,7 @@ public class BlocoDAOJDBC implements BlocoDAO {
     }
 
     /**
-     * Método que faz a atualização de pessoas na base de dados
+     * Método que faz a atualização de blocos na base de dados
      *
      * @param bloco
      */
@@ -63,22 +64,23 @@ public class BlocoDAOJDBC implements BlocoDAO {
         Connection conn = null;
         if (bloco != null) {
             try {
-                conn = FabricaConexao.getConexao();
+                conn = FabricaConecta.getConexao();
                 PreparedStatement pstm = null;
-                pstm = FabricaConexao.getConexao().prepareStatement(UPDATE);
+                pstm = FabricaConecta.getConexao().prepareStatement(UPDATE);
                 //Pega os dados que estão no objeto passado por parametro e coloca na instrução de retorno 
                 
                 pstm.setString(1, bloco.getNome());
-                pstm.setInt(2, bloco.getId());
+                 pstm.setInt(2, bloco.getQntPiso());
+                pstm.setInt(3, bloco.getId());
                 //Executa o comando sql
                 pstm.execute();
                 //Mensagem na tela                
                 JOptionPane.showMessageDialog(null, "O bloco foi atualizada com sucesso!");
                 //Fecha conexão
-                FabricaConexao.fecharConexao(conn, pstm);
+                FabricaConecta.fecharConexao(conn, pstm);
 
             } catch (SQLException e) {
-                System.out.println("Erro ao atualizar pessoa no banco de dados\n" + e.getMessage());
+                System.out.println("Erro ao atualizar bloco no banco de dados\n" + e.getMessage());
             } catch (ClassNotFoundException e) {
                 System.out.println("Erro com o driver de conexão" + e.getMessage());
             }
@@ -86,32 +88,26 @@ public class BlocoDAOJDBC implements BlocoDAO {
     }
 
     /**
-     * Método que faz a remoção de pessoas na base de dados
+     * Método que faz a remoção de blocos na base de dados
      *
-     * @param bloco
+     * @param id
      */
     public void remover(int id) {
 
         Connection conn = null;
         try {
-            conn = FabricaConexao.getConexao();
+            conn = FabricaConecta.getConexao();
             PreparedStatement pstm = null;
-            pstm = FabricaConexao.getConexao().prepareStatement(DELETE);
-            String mensagem = "Você tem certeza que deseja excluir este funcionário?";
-            String titulo = "Atenção!";
-
-            int condicao = JOptionPane.showConfirmDialog(null, mensagem, titulo, JOptionPane.YES_NO_OPTION);
-            if (condicao == JOptionPane.YES_OPTION) {
-                //Pega os dados que estão no objeto passado por parametro e coloca na instrução de retorno 
+            pstm = FabricaConecta.getConexao().prepareStatement(DELETE);
+            //Pega os dados que estão no objeto passado por parametro e coloca na instrução de retorno 
                 pstm.setInt(1, id);
                 //Executa o comando sql
                 pstm.execute();
-                JOptionPane.showMessageDialog(null, "O funcionário foi removido com sucesso!");
-                FabricaConexao.fecharConexao(conn, pstm);
-            }
+                FabricaConecta.fecharConexao(conn, pstm);
+            
 
         } catch (SQLException e) {
-            System.out.println("Erro ao deletar pessoa no banco de dados\n" + e.getMessage());
+            System.out.println("Erro ao deletar bloco no banco de dados\n" + e.getMessage());
         } catch (ClassNotFoundException e) {
             System.out.println("Erro com o driver de conexão" + e.getMessage());
         }
@@ -120,7 +116,7 @@ public class BlocoDAOJDBC implements BlocoDAO {
     }
 
     /**
-     * Método que faz a lista de todas as pessoas da base de dados
+     * Método que faz a lista de todas as blocos da base de dados
      *
      * @return bloco
      */
@@ -131,28 +127,30 @@ public class BlocoDAOJDBC implements BlocoDAO {
         PreparedStatement pstm = null;
         //tras do banco
         ResultSet rs;
-        List<Bloco> bloco = new ArrayList<Bloco>();
+        List<Bloco> blocos = new ArrayList<Bloco>();
 
         try {
-            conn = (Connection) FabricaConexao.getConexao();
+            conn = (Connection) FabricaConecta.getConexao();
             pstm = conn.prepareStatement(LIST);
             rs = pstm.executeQuery();
             while (rs.next()) {
-                Bloco pessoa = new Bloco();
-                pessoa.setId(rs.getInt("id"));
-                pessoa.setNome(rs.getString("nome"));
+                Bloco bloco = new Bloco();
+                bloco.setId(rs.getInt("codigo"));
+                bloco.setNome(rs.getString("bloco"));
+                bloco.setQntPiso(rs.getInt("qnt_piso"));
+                
                 
 
-                bloco.add(pessoa);
+                blocos.add(bloco);
             }
-            FabricaConexao.fecharConexao(conn, pstm, rs);
+            FabricaConecta.fecharConexao(conn, pstm, rs);
         } catch (SQLException e) {
-            System.out.println("Erro ao listar pessoas: " + e.getMessage());
+            System.out.println("Erro ao listar blocos: " + e.getMessage());
 
         } catch (ClassNotFoundException e) {
-            System.out.println("Erro ao listar pessoas: " + e.getMessage());
+            System.out.println("Erro ao listar blocos: " + e.getMessage());
         }
-        return bloco;
+        return blocos;
     }
 
     /**
@@ -168,27 +166,28 @@ public class BlocoDAOJDBC implements BlocoDAO {
         PreparedStatement pstm = null;
         //tras do banco
         ResultSet rs;
-        List<Bloco> pessoas = new ArrayList<Bloco>();
+        List<Bloco> blocos = new ArrayList<Bloco>();
         try {
-            conn = (Connection) FabricaConexao.getConexao();
+            conn = (Connection) FabricaConecta.getConexao();
             pstm = conn.prepareStatement(LIST_NOME);
             pstm.setString(1, "%" + nome + "%");
             rs = pstm.executeQuery();
             while (rs.next()) {
-                Bloco pessoa = new Bloco();
-                pessoa.setId(rs.getInt("id"));
-                pessoa.setNome(rs.getString("nome"));
+                Bloco bloco = new Bloco();
+                bloco.setId(rs.getInt("codigo"));
+                bloco.setNome(rs.getString("bloco"));
+                bloco.setQntPiso(rs.getInt("qnt_piso"));
 
-                pessoas.add(pessoa);
+                blocos.add(bloco);
             }
-            FabricaConexao.fecharConexao(conn, pstm, rs);
+            FabricaConecta.fecharConexao(conn, pstm, rs);
         } catch (SQLException e) {
-            System.out.println("Erro ao listar pessoas: " + e.getMessage());
+            System.out.println("Erro ao listar blocos: " + e.getMessage());
 
         } catch (ClassNotFoundException e) {
-            System.out.println("Erro ao listar pessoas: " + e.getMessage());
+            System.out.println("Erro ao listar blocos: " + e.getMessage());
         }
-        return pessoas;
+        return blocos;
 
     }
 
@@ -205,25 +204,26 @@ public class BlocoDAOJDBC implements BlocoDAO {
         PreparedStatement pstm = null;
         //tras do banco
         ResultSet rs;
-        Bloco pessoa = new Bloco();
+        Bloco bloco = new Bloco();
 
         try {
-            conn = (Connection) FabricaConexao.getConexao();
+            conn = (Connection) FabricaConecta.getConexao();
             pstm = conn.prepareStatement(LIST_ID);
             pstm.setInt(1, id);
             rs = pstm.executeQuery();
             while (rs.next()) {
-                pessoa.setId(rs.getInt("id"));
-                pessoa.setNome(rs.getString("nome"));
+                bloco.setId(rs.getInt("codigo"));
+                bloco.setNome(rs.getString("bloco"));
+                bloco.setQntPiso(rs.getInt("qnt_piso"));
             }
-            FabricaConexao.fecharConexao(conn, pstm, rs);
+            FabricaConecta.fecharConexao(conn, pstm, rs);
         } catch (SQLException e) {
-            System.out.println("Erro ao listar pessoas: " + e.getMessage());
+            System.out.println("Erro ao listar blocos: " + e.getMessage());
 
         } catch (ClassNotFoundException e) {
-            System.out.println("Erro ao listar pessoas: " + e.getMessage());
+            System.out.println("Erro ao listar blocos: " + e.getMessage());
         }
-        return pessoa;
+        return bloco;
 
     }
     
@@ -234,25 +234,26 @@ public class BlocoDAOJDBC implements BlocoDAO {
         PreparedStatement pstm = null;
         //tras do banco
         ResultSet rs;
-        Bloco pessoa = new Bloco();
+        Bloco bloco = new Bloco();
 
         try {
-            conn = (Connection) FabricaConexao.getConexao();
+            conn = (Connection) FabricaConecta.getConexao();
             pstm = conn.prepareStatement(LIST_NOM);
             pstm.setString(1, nome);
             rs = pstm.executeQuery();
             while (rs.next()) {
-                pessoa.setId(rs.getInt("id"));
-                pessoa.setNome(rs.getString("nome"));
+                bloco.setId(rs.getInt("codigo"));
+                bloco.setNome(rs.getString("bloco"));
+                bloco.setQntPiso(rs.getInt("qnt_piso"));
             }
-            FabricaConexao.fecharConexao(conn, pstm, rs);
+            FabricaConecta.fecharConexao(conn, pstm, rs);
         } catch (SQLException e) {
-            System.out.println("Erro ao listar pessoas: " + e.getMessage());
+            System.out.println("Erro ao listar blocos: " + e.getMessage());
 
         } catch (ClassNotFoundException e) {
-            System.out.println("Erro ao listar pessoas: " + e.getMessage());
+            System.out.println("Erro ao listar blocos: " + e.getMessage());
         }
-        return pessoa;
+        return bloco;
 
 
     

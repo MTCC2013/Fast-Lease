@@ -1,16 +1,17 @@
 package br.com.fastlease.view;
 
-import br.com.senai.controller.ArquetipoController;
-import br.com.senai.controller.BlocoController;
-import br.com.senai.controller.ParticularidadeController;
-import br.com.senai.controller.SalaController;
-import br.com.senai.model.Arquetipo;
-import br.com.senai.model.Bloco;
-import br.com.senai.model.Particularidade;
-import br.com.senai.model.Sala;
+import br.com.fastlease.controller.ArquetipoController;
+import br.com.fastlease.controller.BlocoController;
+
+import br.com.fastlease.controller.SalaController;
+import br.com.fastlease.model.Arquetipo;
+import br.com.fastlease.model.Bloco;
+
+import br.com.fastlease.model.Sala;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  * Classe responsavel pela inteface gráfica do software
@@ -18,14 +19,15 @@ import javax.swing.DefaultComboBoxModel;
  * @author Mauricio
  */
 public class SalaEditar extends javax.swing.JFrame {
-    
+
     int linhaSelecionada;
     int codigoMarca;
     SalaTableModel model;
-    
-    public SalaEditar(int selecionado, int cdSala, SalaTableModel mtb) {     
-                
+
+    public SalaEditar(int selecionado, int cdSala, SalaTableModel mtb) {
+
         initComponents();
+        setResizable(false);
         setLocationRelativeTo(null);
         linhaSelecionada = selecionado;
         cdSala = cdSala;
@@ -37,24 +39,24 @@ public class SalaEditar extends javax.swing.JFrame {
 
         cmpId.setText(Integer.toString(p.getId()));
         cmpNome.setText(p.getNome());
-        
+
         carregarComboArq();
         carregarComboBloco();
-        carregarComboPart();
+        
 
-        if (p.getPiso() == 0) {
+        if (p.getPiso().equals("Terreo")) {
             cmbPiso.setSelectedIndex(0);
-        } else if (p.getPiso() == 1) {
+        } else if (p.getPiso().equals("1")) {
             cmbPiso.setSelectedIndex(1);
-        } else if (p.getPiso() == 2) {
+        } else if (p.getPiso().equals("2")) {
             cmbPiso.setSelectedIndex(2);
-        } else if (p.getPiso() == 3) {
+        } else if (p.getPiso().equals("3")) {
             cmbPiso.setSelectedIndex(3);
-        } else if (p.getPiso() == 4) {
+        } else if (p.getPiso().equals("4")) {
             cmbPiso.setSelectedIndex(4);
-        } else if (p.getPiso() == 5) {
+        } else if (p.getPiso().equals("5")) {
             cmbPiso.setSelectedIndex(5);
-        } else if (p.getPiso() == 6) {
+        } else if (p.getPiso().equals("6")) {
             cmbPiso.setSelectedIndex(6);
         }
 
@@ -78,8 +80,6 @@ public class SalaEditar extends javax.swing.JFrame {
         lbArquetipo = new javax.swing.JLabel();
         lbBloco = new javax.swing.JLabel();
         cmpNome = new javax.swing.JTextField();
-        lbPart = new javax.swing.JLabel();
-        cmbPart = new javax.swing.JComboBox();
         cmbPiso = new javax.swing.JComboBox();
         lbPiso = new javax.swing.JLabel();
         cmbArquetipo = new javax.swing.JComboBox();
@@ -87,7 +87,6 @@ public class SalaEditar extends javax.swing.JFrame {
         lbObs = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtObs = new javax.swing.JTextArea();
-        btVoltar = new javax.swing.JButton();
         cmpId = new javax.swing.JTextField();
         lbNome1 = new javax.swing.JLabel();
         painelCabecalhoCliente1 = new javax.swing.JPanel();
@@ -96,7 +95,7 @@ public class SalaEditar extends javax.swing.JFrame {
         btApagarFun = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("CADASTRO DE FUNCIONÁRIOS");
+        setTitle("Editar Sala");
 
         painelPrincipal.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -139,9 +138,6 @@ public class SalaEditar extends javax.swing.JFrame {
         lbBloco.setBackground(new java.awt.Color(204, 204, 0));
         lbBloco.setText("Bloco:");
 
-        lbPart.setBackground(new java.awt.Color(204, 204, 0));
-        lbPart.setText("Particularidade:");
-
         cmbPiso.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Terreo", "1", "2", "3", "4", "5", "6" }));
 
         lbPiso.setBackground(new java.awt.Color(204, 204, 0));
@@ -157,14 +153,6 @@ public class SalaEditar extends javax.swing.JFrame {
         txtObs.setColumns(20);
         txtObs.setRows(5);
         jScrollPane1.setViewportView(txtObs);
-
-        btVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/senai/Imagens/setaLeft.png"))); // NOI18N
-        btVoltar.setContentAreaFilled(false);
-        btVoltar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btVoltarActionPerformed(evt);
-            }
-        });
 
         cmpId.setEnabled(false);
 
@@ -184,37 +172,34 @@ public class SalaEditar extends javax.swing.JFrame {
                     .addGroup(abaCadastroCliente1Layout.createSequentialGroup()
                         .addGroup(abaCadastroCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(abaCadastroCliente1Layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
+                                .addGap(44, 44, 44)
                                 .addGroup(abaCadastroCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(lbNome)
                                     .addGroup(abaCadastroCliente1Layout.createSequentialGroup()
                                         .addGroup(abaCadastroCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(lbBloco)
-                                            .addComponent(lbArquetipo)
-                                            .addComponent(lbPart)
-                                            .addComponent(lbObs))
+                                            .addComponent(lbArquetipo))
                                         .addGap(1, 1, 1))))
-                            .addComponent(btVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(abaCadastroCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, abaCadastroCliente1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(lbObs)))
+                        .addGroup(abaCadastroCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(abaCadastroCliente1Layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
-                                .addComponent(cmpNome, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE))
+                                .addComponent(cmpNome, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(abaCadastroCliente1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(cmbArquetipo, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(abaCadastroCliente1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(abaCadastroCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(cmbPart, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, abaCadastroCliente1Layout.createSequentialGroup()
-                                        .addComponent(cmbBloco, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(lbPiso)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(cmbPiso, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(cmbBloco, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(lbPiso)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cmbPiso, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(abaCadastroCliente1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane1)))))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(56, Short.MAX_VALUE))
         );
         abaCadastroCliente1Layout.setVerticalGroup(
@@ -234,25 +219,16 @@ public class SalaEditar extends javax.swing.JFrame {
                     .addComponent(cmbArquetipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(abaCadastroCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(abaCadastroCliente1Layout.createSequentialGroup()
-                        .addComponent(lbBloco)
-                        .addGap(18, 18, 18)
-                        .addGroup(abaCadastroCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbPart)
-                            .addComponent(cmbPart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lbBloco)
                     .addGroup(abaCadastroCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(cmbBloco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lbPiso)
                         .addComponent(cmbPiso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(abaCadastroCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(abaCadastroCliente1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(abaCadastroCliente1Layout.createSequentialGroup()
-                        .addComponent(lbObs)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(lbObs)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         painelCabecalhoCliente1.setBackground(new java.awt.Color(0, 0, 0));
@@ -260,7 +236,7 @@ public class SalaEditar extends javax.swing.JFrame {
         labelCadCliente1.setBackground(new java.awt.Color(252, 250, 250));
         labelCadCliente1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         labelCadCliente1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelCadCliente1.setText("CADASTRO DE SALAS");
+        labelCadCliente1.setText("ATUALIZAÇÃO DE SALAS");
         labelCadCliente1.setOpaque(true);
 
         btCadastrar.setBackground(new java.awt.Color(255, 255, 255));
@@ -357,11 +333,14 @@ public class SalaEditar extends javax.swing.JFrame {
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
 
         Sala f = new Sala();
+        if (cmpNome.getText().length() <=0){
+            JOptionPane.showMessageDialog(null, "Campos obrigatórios vazios");
+        }else{        
         f.setId(Integer.parseInt(cmpId.getText()));
         f.setNome(cmpNome.getText());
-        f.setArquetipo(cmbArquetipo.getSelectedItem().toString());
-        f.setIdBloco((Bloco)cmbBloco.getSelectedItem());
-        f.setPiso((Integer)cmbPiso.getSelectedItem());
+        f.setIdArquetipo((Arquetipo) cmbArquetipo.getSelectedItem());
+        f.setIdBloco((Bloco) cmbBloco.getSelectedItem());
+        f.setPiso(cmbPiso.getSelectedItem().toString());
         f.setObs(txtObs.getText());
 
         SalaController fc = new SalaController();
@@ -369,23 +348,24 @@ public class SalaEditar extends javax.swing.JFrame {
         model.updateSala(linhaSelecionada, f);
         dispose();
 
-        limpar();        
+        }
     }//GEN-LAST:event_btCadastrarActionPerformed
-    
+
     private void btApagarFunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btApagarFunActionPerformed
 
         limpar();
     }//GEN-LAST:event_btApagarFunActionPerformed
-   
-    private void limpar(){        
-            cmpNome.setText("");
-            txtObs.setText("");
-            cmbArquetipo.setSelectedItem("");
-            cmbBloco.setSelectedItem("");
-            cmbPiso.setSelectedItem("");
-            cmbPart.setSelectedItem("");
-   
-    }    
+
+    private void limpar() {
+        cmpNome.setText("");
+        txtObs.setText("");
+        cmbArquetipo.setSelectedItem("");
+        cmbBloco.setSelectedItem("");
+        cmbPiso.setSelectedItem("");
+       
+
+    }
+
     private void carregarComboArq() {
         //assim como é feito numa JTable, temos o DefaultComboBoxModel que é o model do JComboBox
         DefaultComboBoxModel comboModel = (DefaultComboBoxModel) cmbArquetipo.getModel();
@@ -395,7 +375,6 @@ public class SalaEditar extends javax.swing.JFrame {
         List<Arquetipo> s = new ArrayList<Arquetipo>();
         ArquetipoController a = new ArquetipoController();
         s = a.buscarArquetipo();
-
 
         for (int linha = 0; linha < s.size(); linha++) {
             //pegando a categoria da lista
@@ -416,7 +395,6 @@ public class SalaEditar extends javax.swing.JFrame {
         BlocoController a = new BlocoController();
         s = a.buscarBloco();
 
-
         for (int linha = 0; linha < s.size(); linha++) {
             //pegando a categoria da lista
             Bloco bloco = s.get(linha);
@@ -426,36 +404,13 @@ public class SalaEditar extends javax.swing.JFrame {
         }
     }
 
-    private void carregarComboPart() {
-        //assim como é feito numa JTable, temos o DefaultComboBoxModel que é o model do JComboBox
-        DefaultComboBoxModel comboModel = (DefaultComboBoxModel) cmbPart.getModel();
-        //removendo todos os elementos do combo
-        comboModel.removeAllElements();
-        //cria a lista: java.util.List
-        List<Particularidade> s = new ArrayList<Particularidade>();
-        ParticularidadeController a = new ParticularidadeController();
-        s = a.buscarParticularidade();
-
-
-        for (int linha = 0; linha < s.size(); linha++) {
-            //pegando a categoria da lista
-            Particularidade part = s.get(linha);
-            //adicionando a categoria no combo
-            comboModel.addElement(part);
-
-        }
-    }
-    private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
-        dispose();
-    }//GEN-LAST:event_btVoltarActionPerformed
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel abaCadastroCliente1;
     private javax.swing.JButton btApagarFun;
     private javax.swing.JButton btCadastrar;
-    private javax.swing.JButton btVoltar;
     private javax.swing.JComboBox cmbArquetipo;
     private javax.swing.JComboBox cmbBloco;
-    private javax.swing.JComboBox cmbPart;
     private javax.swing.JComboBox cmbPiso;
     private javax.swing.JTextField cmpId;
     private javax.swing.JTextField cmpNome;
@@ -466,7 +421,6 @@ public class SalaEditar extends javax.swing.JFrame {
     private javax.swing.JLabel lbNome;
     private javax.swing.JLabel lbNome1;
     private javax.swing.JLabel lbObs;
-    private javax.swing.JLabel lbPart;
     private javax.swing.JLabel lbPiso;
     private javax.swing.JPanel painelCabecalhoCliente1;
     private javax.swing.JPanel painelPrincipal;

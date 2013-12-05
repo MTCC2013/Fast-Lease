@@ -1,6 +1,6 @@
 package br.com.fastlease.dao;
 
-import br.com.model.negocio.Usuario;
+import br.com.fastlease.model.Usuario;
 import java.util.List;
 
 /**
@@ -48,5 +48,7 @@ public interface UsuarioDAO {
     Usuario getUsuariobyId(Integer codigo);
     
     Usuario getUsuariobyNom(String nome);
+    
+    boolean validaLogin(String login, String senha);
     
 }

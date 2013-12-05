@@ -1,10 +1,12 @@
 package br.com.fastlease.view;
 
-import br.com.senai.controller.ArquetipoController;
-import br.com.senai.model.Arquetipo;
+import br.com.fastlease.controller.ArquetipoController;
+import br.com.fastlease.model.Arquetipo;
+import javax.swing.JOptionPane;
 
 /**
- * Classe responsavel pela inteface gráfica do software
+ * Classe responsavel pela inteface gr
+ * gráfica do software
  *
  * @author Mauricio
  */
@@ -14,6 +16,7 @@ public class ArquetipoInserir extends javax.swing.JFrame {
 
     public ArquetipoInserir(ArquetipoTableModel mtb) {
         initComponents();
+        setResizable(false);
         setLocationRelativeTo(null);
         model = mtb;
     }
@@ -33,14 +36,13 @@ public class ArquetipoInserir extends javax.swing.JFrame {
         abaCadastroCliente1 = new javax.swing.JPanel();
         lbNome = new javax.swing.JLabel();
         cmpNome = new javax.swing.JTextField();
-        btVoltar = new javax.swing.JButton();
         painelCabecalhoCliente1 = new javax.swing.JPanel();
         labelCadCliente1 = new javax.swing.JLabel();
         btCadastrar = new javax.swing.JButton();
         btApagarFun = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("CADASTRO DE FUNCIONÁRIOS");
+        setTitle("Inserir Arquetipo");
 
         painelPrincipal.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -77,37 +79,25 @@ public class ArquetipoInserir extends javax.swing.JFrame {
         lbNome.setBackground(new java.awt.Color(204, 204, 0));
         lbNome.setText("Nome:");
 
-        btVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/senai/Imagens/setaLeft.png"))); // NOI18N
-        btVoltar.setContentAreaFilled(false);
-        btVoltar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btVoltarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout abaCadastroCliente1Layout = new javax.swing.GroupLayout(abaCadastroCliente1);
         abaCadastroCliente1.setLayout(abaCadastroCliente1Layout);
         abaCadastroCliente1Layout.setHorizontalGroup(
             abaCadastroCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(abaCadastroCliente1Layout.createSequentialGroup()
-                .addGroup(abaCadastroCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(abaCadastroCliente1Layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addComponent(lbNome))
-                    .addComponent(btVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addComponent(cmpNome, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(84, 84, 84)
+                .addComponent(lbNome)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmpNome, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         abaCadastroCliente1Layout.setVerticalGroup(
             abaCadastroCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(abaCadastroCliente1Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(30, 30, 30)
                 .addGroup(abaCadastroCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbNome)
-                    .addComponent(cmpNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(btVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmpNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbNome))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         painelCabecalhoCliente1.setBackground(new java.awt.Color(0, 0, 0));
@@ -192,7 +182,7 @@ public class ArquetipoInserir extends javax.swing.JFrame {
                 .addComponent(painelCabecalhoCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(abaCadastroCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addGap(18, 19, Short.MAX_VALUE)
                 .addComponent(vistaInf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -211,13 +201,21 @@ public class ArquetipoInserir extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
 
-        Arquetipo f = new Arquetipo();
-        f.setNome(cmpNome.getText());
+        Arquetipo m = new Arquetipo();
+        if (cmpNome.getText().length() > 0){
+           m.setNome(cmpNome.getText());
 
-        ArquetipoController fc = new ArquetipoController();
-        fc.inserir(f);
-        model.addArquetipo(pesquisar(f.getNome()));
-        dispose();
+        ArquetipoController mc = new ArquetipoController();
+        mc.inserir(m);
+        Arquetipo arquetipoinserido = pesquisar(m.getNome());
+        if(arquetipoinserido != null){
+        model.addArquetipo(pesquisar(m.getNome()));
+        dispose(); 
+        }    
+        }else{
+            JOptionPane.showMessageDialog(null,"Arquetipo não pode ser vazio");
+        }
+           
     }//GEN-LAST:event_btCadastrarActionPerformed
     private Arquetipo pesquisar (String nome){
         ArquetipoController mc = new ArquetipoController();
@@ -231,14 +229,10 @@ public class ArquetipoInserir extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btApagarFunActionPerformed
 
-    private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
-        dispose();
-    }//GEN-LAST:event_btVoltarActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel abaCadastroCliente1;
     private javax.swing.JButton btApagarFun;
     private javax.swing.JButton btCadastrar;
-    private javax.swing.JButton btVoltar;
     private javax.swing.JTextField cmpNome;
     private javax.swing.JLabel labelCadCliente1;
     private javax.swing.JLabel lbNome;

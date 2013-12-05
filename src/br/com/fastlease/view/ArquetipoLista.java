@@ -1,7 +1,7 @@
 package br.com.fastlease.view;
 
-import br.com.senai.controller.*;
-import br.com.senai.model.Arquetipo;
+import br.com.fastlease.controller.*;
+import br.com.fastlease.model.Arquetipo;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
@@ -18,7 +18,8 @@ public class ArquetipoLista extends javax.swing.JFrame {
     public ArquetipoLista() {
 
         initComponents();
-        setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
+        setResizable(false);
+        setLocationRelativeTo(null);
         List<Arquetipo> lista = new ArrayList<Arquetipo>();
         ArquetipoController a = new ArquetipoController();
         lista = a.buscarArquetipo();
@@ -45,16 +46,17 @@ public class ArquetipoLista extends javax.swing.JFrame {
         painelInf = new javax.swing.JPanel();
         painelCabecalhoCliente1 = new javax.swing.JPanel();
         labelCadCliente1 = new javax.swing.JLabel();
-        labelNomeRelFun = new javax.swing.JLabel();
-        cmpNomePesq = new javax.swing.JTextField();
         btExcluir = new javax.swing.JButton();
         btEditar = new javax.swing.JButton();
         btInserir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaArquetipo = new javax.swing.JTable();
+        jPanel5 = new javax.swing.JPanel();
+        labelNomeRelFun = new javax.swing.JLabel();
+        cmpNomePesq = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Histórico do Funcionário");
+        setTitle("Lista de Arquetipos");
 
         painelPrincipal.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -92,20 +94,6 @@ public class ArquetipoLista extends javax.swing.JFrame {
         labelCadCliente1.setText("ARQUETIPOS");
         labelCadCliente1.setToolTipText("");
         labelCadCliente1.setOpaque(true);
-
-        labelNomeRelFun.setForeground(new java.awt.Color(255, 255, 255));
-        labelNomeRelFun.setText("Nome: ");
-
-        cmpNomePesq.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmpNomePesqActionPerformed(evt);
-            }
-        });
-        cmpNomePesq.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                cmpNomePesqKeyPressed(evt);
-            }
-        });
 
         btExcluir.setBackground(new java.awt.Color(255, 255, 255));
         btExcluir.setText("Excluir");
@@ -156,16 +144,12 @@ public class ArquetipoLista extends javax.swing.JFrame {
             .add(painelCabecalhoCliente1Layout.createSequentialGroup()
                 .addContainerGap()
                 .add(labelCadCliente1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 244, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(66, 66, 66)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 317, Short.MAX_VALUE)
                 .add(btExcluir)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(btEditar)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(btInserir)
-                .add(193, 193, 193)
-                .add(labelNomeRelFun)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(cmpNomePesq, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
                 .addContainerGap())
         );
         painelCabecalhoCliente1Layout.setVerticalGroup(
@@ -176,12 +160,10 @@ public class ArquetipoLista extends javax.swing.JFrame {
             .add(painelCabecalhoCliente1Layout.createSequentialGroup()
                 .addContainerGap()
                 .add(painelCabecalhoCliente1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(labelNomeRelFun, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(cmpNomePesq, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(btExcluir)
                     .add(btEditar)
                     .add(btInserir))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tabelaArquetipo.setModel(new javax.swing.table.DefaultTableModel(
@@ -194,17 +176,57 @@ public class ArquetipoLista extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabelaArquetipo);
 
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar"));
+
+        labelNomeRelFun.setText("Nome: ");
+
+        cmpNomePesq.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmpNomePesqActionPerformed(evt);
+            }
+        });
+        cmpNomePesq.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cmpNomePesqKeyPressed(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout jPanel5Layout = new org.jdesktop.layout.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(labelNomeRelFun)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(cmpNomePesq, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(labelNomeRelFun, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(cmpNomePesq, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+
         org.jdesktop.layout.GroupLayout painelPrincipalLayout = new org.jdesktop.layout.GroupLayout(painelPrincipal);
         painelPrincipal.setLayout(painelPrincipalLayout);
         painelPrincipalLayout.setHorizontalGroup(
             painelPrincipalLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(paineSup, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, painelInf, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .add(painelPrincipalLayout.createSequentialGroup()
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, painelPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(painelPrincipalLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(painelCabecalhoCliente1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(jScrollPane1))
+                .add(painelPrincipalLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                    .add(jScrollPane1)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, painelCabecalhoCliente1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, painelPrincipalLayout.createSequentialGroup()
+                        .add(jPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         painelPrincipalLayout.setVerticalGroup(
@@ -214,8 +236,10 @@ public class ArquetipoLista extends javax.swing.JFrame {
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(painelCabecalhoCliente1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 390, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 17, Short.MAX_VALUE)
+                .add(jPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 104, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(painelInf, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -329,10 +353,23 @@ public class ArquetipoLista extends javax.swing.JFrame {
     private javax.swing.JButton btEditar;
     private javax.swing.JButton btExcluir;
     private javax.swing.JButton btInserir;
+    private javax.swing.JTextField campoPesquisa;
+    private javax.swing.JTextField campoPesquisa1;
+    private javax.swing.JTextField campoPesquisa2;
+    private javax.swing.JTextField campoPesquisa3;
     private javax.swing.JTextField cmpNomePesq;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelCadCliente1;
     private javax.swing.JLabel labelNomeRelFun;
+    private javax.swing.JLabel labelNomeRelFun1;
+    private javax.swing.JLabel labelNomeRelFun2;
+    private javax.swing.JLabel labelNomeRelFun3;
+    private javax.swing.JLabel labelNomeRelFun4;
     private javax.swing.JPanel paineSup;
     private javax.swing.JPanel painelCabecalhoCliente1;
     private javax.swing.JPanel painelInf;

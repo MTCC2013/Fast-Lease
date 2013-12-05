@@ -1,7 +1,8 @@
 package br.com.fastlease.view;
 
-import br.com.senai.controller.ArquetipoController;
-import br.com.senai.model.Arquetipo;
+import br.com.fastlease.controller.ArquetipoController;
+import br.com.fastlease.model.Arquetipo;
+import javax.swing.JOptionPane;
 
 /**
  * Classe responsavel pela inteface gráfica do software
@@ -16,6 +17,8 @@ public class ArquetipoEditar extends javax.swing.JFrame {
 
     public ArquetipoEditar(int selecionado, int cdModelo, ArquetipoTableModel mtb) {
         initComponents();
+        setResizable(false);
+        setLocationRelativeTo(null);
         setLocationRelativeTo(null);
         linhaSelecionada = selecionado;
         cdModelo = cdModelo;
@@ -44,7 +47,6 @@ public class ArquetipoEditar extends javax.swing.JFrame {
         abaCadastroCliente1 = new javax.swing.JPanel();
         lbNome = new javax.swing.JLabel();
         cmpNome = new javax.swing.JTextField();
-        btVoltar = new javax.swing.JButton();
         cmpId = new javax.swing.JTextField();
         lbNome1 = new javax.swing.JLabel();
         painelCabecalhoCliente1 = new javax.swing.JPanel();
@@ -53,7 +55,7 @@ public class ArquetipoEditar extends javax.swing.JFrame {
         btApagarFun = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("CADASTRO DE ARQUETIPO");
+        setTitle("Editar Arquetipo");
 
         painelPrincipal.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -90,14 +92,6 @@ public class ArquetipoEditar extends javax.swing.JFrame {
         lbNome.setBackground(new java.awt.Color(204, 204, 0));
         lbNome.setText("Nome:");
 
-        btVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/senai/Imagens/setaLeft.png"))); // NOI18N
-        btVoltar.setContentAreaFilled(false);
-        btVoltar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btVoltarActionPerformed(evt);
-            }
-        });
-
         cmpId.setEnabled(false);
 
         lbNome1.setBackground(new java.awt.Color(204, 204, 0));
@@ -108,34 +102,30 @@ public class ArquetipoEditar extends javax.swing.JFrame {
         abaCadastroCliente1Layout.setHorizontalGroup(
             abaCadastroCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(abaCadastroCliente1Layout.createSequentialGroup()
+                .addGap(78, 78, 78)
                 .addGroup(abaCadastroCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(abaCadastroCliente1Layout.createSequentialGroup()
                         .addComponent(lbNome1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cmpId, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(abaCadastroCliente1Layout.createSequentialGroup()
-                        .addGroup(abaCadastroCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(abaCadastroCliente1Layout.createSequentialGroup()
-                                .addGap(65, 65, 65)
-                                .addComponent(lbNome))
-                            .addComponent(btVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10)
-                        .addComponent(cmpNome, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lbNome)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cmpNome, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         abaCadastroCliente1Layout.setVerticalGroup(
             abaCadastroCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(abaCadastroCliente1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(21, 21, 21)
                 .addGroup(abaCadastroCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmpId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbNome1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(abaCadastroCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbNome)
-                    .addComponent(cmpNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(btVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmpNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbNome))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         painelCabecalhoCliente1.setBackground(new java.awt.Color(0, 0, 0));
@@ -143,7 +133,7 @@ public class ArquetipoEditar extends javax.swing.JFrame {
         labelCadCliente1.setBackground(new java.awt.Color(252, 250, 250));
         labelCadCliente1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         labelCadCliente1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelCadCliente1.setText("CADASTRO DE ARQUETIPOS");
+        labelCadCliente1.setText("ATUALIZAÇÃO DE ARQUETIPO");
         labelCadCliente1.setOpaque(true);
 
         btCadastrar.setBackground(new java.awt.Color(255, 255, 255));
@@ -185,6 +175,10 @@ public class ArquetipoEditar extends javax.swing.JFrame {
         painelCabecalhoCliente1Layout.setVerticalGroup(
             painelCabecalhoCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelCabecalhoCliente1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(labelCadCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelCabecalhoCliente1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(painelCabecalhoCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelCabecalhoCliente1Layout.createSequentialGroup()
@@ -193,10 +187,6 @@ public class ArquetipoEditar extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelCabecalhoCliente1Layout.createSequentialGroup()
                         .addComponent(btApagarFun)
                         .addGap(34, 34, 34))))
-            .addGroup(painelCabecalhoCliente1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(labelCadCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout painelPrincipalLayout = new javax.swing.GroupLayout(painelPrincipal);
@@ -240,13 +230,19 @@ public class ArquetipoEditar extends javax.swing.JFrame {
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
 
         Arquetipo m = new Arquetipo();
+        if (cmpNome.getText().length() > 0){
         m.setId(Integer.parseInt(cmpId.getText()));
         m.setNome(cmpNome.getText());
 
         ArquetipoController mc = new ArquetipoController();
         mc.atualizar(m);
         model.updateArquetipo(linhaSelecionada, m);
-        dispose();
+        dispose(); 
+            
+        }else{
+            JOptionPane.showMessageDialog(null,"Arquetipo não pode ser vazio");
+        }
+           
        
     }//GEN-LAST:event_btCadastrarActionPerformed
 
@@ -259,14 +255,10 @@ public class ArquetipoEditar extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btApagarFunActionPerformed
     
-    private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
-        dispose();
-    }//GEN-LAST:event_btVoltarActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel abaCadastroCliente1;
     private javax.swing.JButton btApagarFun;
     private javax.swing.JButton btCadastrar;
-    private javax.swing.JButton btVoltar;
     private javax.swing.JTextField cmpId;
     private javax.swing.JTextField cmpNome;
     private javax.swing.JLabel labelCadCliente1;

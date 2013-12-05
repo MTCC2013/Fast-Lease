@@ -1,9 +1,7 @@
 package br.com.fastlease.view;
 
-import br.com.senai.model.Bloco;
+import br.com.fastlease.model.Bloco;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -17,11 +15,12 @@ public class BlocoTableModel extends AbstractTableModel {
 
     private static final int COL_ID = 0;
     private static final int COL_NOME = 1;
+    private static final int COL_PISO = 2;
     
     
     private List<Bloco> linhas;
     // Array com os nomes das colunas.
-    private String[] colunas = new String[]{"Código", "Nome"};
+    private String[] colunas = new String[]{"Código", "Nome","Qnt Pisos"};
 
     //Cria uma BlocoTableModel sem nenhuma linha
     public BlocoTableModel() {
@@ -55,7 +54,14 @@ public class BlocoTableModel extends AbstractTableModel {
         if (columnIndex == COL_ID) {
             return Integer.class;
         }
-        return String.class;
+        if(columnIndex == COL_NOME){
+            return String.class;
+        }
+        if (columnIndex == COL_PISO){
+            return Integer.class;
+        }
+        return null;
+        
     }
 
     public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -73,6 +79,8 @@ public class BlocoTableModel extends AbstractTableModel {
             return m.getId();
         } else if (column == COL_NOME) {
             return m.getNome();
+        }else if (column == COL_PISO) {
+            return m.getQntPiso();
         }
         return "";
     }
@@ -85,6 +93,9 @@ public class BlocoTableModel extends AbstractTableModel {
             u.setId((Integer) aValue);
         } else if (column == COL_NOME) {
             u.setNome(aValue.toString());
+        } 
+        else if (column == COL_PISO) {
+            u.setQntPiso((Integer)aValue);
         } 
     }
 
@@ -107,7 +118,7 @@ public class BlocoTableModel extends AbstractTableModel {
 
         // Notifica a mudança.
         fireTableRowsInserted(ultimoIndice, ultimoIndice);
-        ordenarPorNome();
+        
 
     }
     
@@ -115,7 +126,7 @@ public class BlocoTableModel extends AbstractTableModel {
             linhas.set(indiceLinha, bloco);
         // Notifica a mudança.
         fireTableRowsUpdated(indiceLinha, indiceLinha);
-        ordenarPorNome();
+        
     }
     
     //Remove o sócio da linha especificada.
@@ -125,7 +136,7 @@ public class BlocoTableModel extends AbstractTableModel {
 
         // Notifica a mudança.
         fireTableRowsDeleted(indiceLinha, indiceLinha);
-        ordenarPorNome();
+        
     }
 
 // Remove todos os registros.
@@ -137,16 +148,5 @@ public class BlocoTableModel extends AbstractTableModel {
         fireTableDataChanged();
     }
     
-    public void ordenarPorNome() {
-        //ordena pelo nome
-        Collections.sort(linhas, new Comparator<Bloco>() {
-
-            public int compare(Bloco o1, Bloco o2) {
-                return o1.getNome().compareTo(o2.getNome());
-            }
-        });
-
-        //avisa que a tabela foi alterada
-        fireTableDataChanged();
-    }
+    
 }

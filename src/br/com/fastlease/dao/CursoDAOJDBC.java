@@ -1,7 +1,7 @@
 package br.com.fastlease.dao;
 
-import br.com.model.negocio.Categoria;
-import br.com.model.negocio.Curso;
+import br.com.fastlease.model.Categoria;
+import br.com.fastlease.model.Curso;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -49,7 +49,7 @@ public class CursoDAOJDBC implements CursoDAO {
                 pstm.setString(2,curso.getFase());
                 pstm.setString(3,curso.getDuracao());
                 pstm.setDate(4, new java.sql.Date(curso.getDataTermino().getTime()));
-                pstm.setInt(5,curso.getCategoria().getCodigo());
+                pstm.setInt(5,curso.getIdCategoria().getId());
                 
                 //Executa o comando sql.
                 pstm.execute();
@@ -91,8 +91,8 @@ public class CursoDAOJDBC implements CursoDAO {
                 pstm.setString(2,curso.getFase());
                 pstm.setString(3,curso.getDuracao());
                 pstm.setDate(4, new java.sql.Date(curso.getDataTermino().getTime()));
-                pstm.setInt(5,curso.getCategoria().getCodigo());
-                pstm.setInt(6, curso.getCodigo());
+                pstm.setInt(5,curso.getIdCategoria().getId());
+                pstm.setInt(6, curso.getId());
                 //Executa o comando sql.
                 pstm.execute();
                 JOptionPane.showMessageDialog(null, "O curso foi atualizado com sucesso!");
@@ -164,15 +164,15 @@ public class CursoDAOJDBC implements CursoDAO {
             rs = pstm.executeQuery();
             while (rs.next()) {
                 Curso curso = new Curso();
-                curso.setCodigo(rs.getInt("codigo"));
+                curso.setId(rs.getInt("codigo"));
                 curso.setCurso(rs.getString("curso"));
                 curso.setFase(rs.getString("fase"));
                 curso.setDuracao(rs.getString("duracao"));
                 curso.setDataTermino(rs.getDate("data_termino"));
                 Categoria c = new Categoria();
-                c.setCodigo(rs.getInt("categoria.codigo"));
+                c.setId(rs.getInt("categoria.codigo"));
                 c.setCategoria(rs.getString("categoria.categoria"));
-                curso.setCategoria(c);
+                curso.setIdCategoria(c);
                 
                 cursos.add(curso);
             }
@@ -211,15 +211,15 @@ public class CursoDAOJDBC implements CursoDAO {
             rs = pstm.executeQuery();
             while (rs.next()) {
                 Curso curso = new Curso();
-                curso.setCodigo(rs.getInt("codigo"));
+                curso.setId(rs.getInt("codigo"));
                 curso.setCurso(rs.getString("curso"));
                 curso.setFase(rs.getString("fase"));
                 curso.setDuracao(rs.getString("duracao"));
                 curso.setDataTermino(rs.getDate("data_termino"));
                 Categoria c = new Categoria();
-                c.setCodigo(rs.getInt("categoria.codigo"));
+                c.setId(rs.getInt("categoria.codigo"));
                 c.setCategoria(rs.getString("categoria.categoria"));
-                curso.setCategoria(c);
+                curso.setIdCategoria(c);
                 cursos.add(curso);
             }
             FabricaConecta.fecharConexao(conn, pstm, rs);
@@ -252,15 +252,15 @@ public class CursoDAOJDBC implements CursoDAO {
             pstm.setInt(1,codigo);
             rs = pstm.executeQuery();
             while (rs.next()) {
-                curso.setCodigo(rs.getInt("curso.codigo"));
+                curso.setId(rs.getInt("curso.codigo"));
                 curso.setCurso(rs.getString("curso"));
                 curso.setFase(rs.getString("fase"));
                 curso.setDuracao(rs.getString("duracao"));
                 curso.setDataTermino(rs.getDate("data_termino"));
                 Categoria c = new Categoria();
-                c.setCodigo(rs.getInt("categoria.codigo"));
+                c.setId(rs.getInt("categoria.codigo"));
                 c.setCategoria(rs.getString("categoria.categoria"));
-                curso.setCategoria(c);
+                curso.setIdCategoria(c);
                 
             }
             FabricaConecta.fecharConexao(conn, pstm, rs);
@@ -291,15 +291,15 @@ public class CursoDAOJDBC implements CursoDAO {
             pstm.setString(1,nome);
             rs = pstm.executeQuery();
             while (rs.next()) {
-                curso.setCodigo(rs.getInt("codigo"));
+                curso.setId(rs.getInt("codigo"));
                 curso.setCurso(rs.getString("curso"));
                 curso.setFase(rs.getString("fase"));
                 curso.setDuracao(rs.getString("duracao"));
                 curso.setDataTermino(rs.getDate("data_termino"));
                 Categoria c = new Categoria();
-                c.setCodigo(rs.getInt("categoria.codigo"));
+                c.setId(rs.getInt("categoria.codigo"));
                 c.setCategoria(rs.getString("categoria.categoria"));
-                curso.setCategoria(c);
+                curso.setIdCategoria(c);
                 
             }
             FabricaConecta.fecharConexao(conn, pstm, rs);
@@ -312,7 +312,9 @@ public class CursoDAOJDBC implements CursoDAO {
         return curso;
 
     }
+
     
+   
     
 }
 

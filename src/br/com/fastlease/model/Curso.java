@@ -16,11 +16,11 @@ public class Curso {
     private Date dataTermino;
     private Categoria idCategoria;
 
-    public int getCodigo() {
+    public int getId() {
         return id;
     }
 
-    public void setCodigo(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 

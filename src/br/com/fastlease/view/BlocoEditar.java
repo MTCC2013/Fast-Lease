@@ -1,7 +1,8 @@
 package br.com.fastlease.view;
 
-import br.com.senai.controller.BlocoController;
-import br.com.senai.model.Bloco;
+import br.com.fastlease.controller.BlocoController;
+import br.com.fastlease.model.Bloco;
+import javax.swing.JOptionPane;
 
 /**
  * Classe responsavel pela inteface gráfica do software
@@ -16,6 +17,7 @@ public class BlocoEditar extends javax.swing.JFrame {
 
     public BlocoEditar(int selecionado, int cdModelo, BlocoTableModel mtb) {
         initComponents();
+        setResizable(false);
         setLocationRelativeTo(null);
         linhaSelecionada = selecionado;
         cdModelo = cdModelo;
@@ -24,9 +26,10 @@ public class BlocoEditar extends javax.swing.JFrame {
         BlocoController mc = new BlocoController();
         Bloco mo = new Bloco();
         mo = mc.buscarBlocobyId(cdModelo);
-        
+
         cmpId.setText(String.valueOf(mo.getId()));
         cmpNome.setText(mo.getNome());
+        cmpPiso.setText(String.valueOf(mo.getQntPiso()));
     }
 
     /**
@@ -41,19 +44,20 @@ public class BlocoEditar extends javax.swing.JFrame {
         painelPrincipal = new javax.swing.JPanel();
         vistaInf = new javax.swing.JPanel();
         vistaSup = new javax.swing.JPanel();
-        abaCadastroCliente1 = new javax.swing.JPanel();
+        cmpQtdePiso = new javax.swing.JPanel();
         lbNome = new javax.swing.JLabel();
         cmpNome = new javax.swing.JTextField();
-        btVoltar = new javax.swing.JButton();
         cmpId = new javax.swing.JTextField();
         lbNome1 = new javax.swing.JLabel();
+        cmpPiso = new javax.swing.JTextField();
+        lbNome2 = new javax.swing.JLabel();
         painelCabecalhoCliente1 = new javax.swing.JPanel();
         labelCadCliente1 = new javax.swing.JLabel();
         btCadastrar = new javax.swing.JButton();
         btApagarFun = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("CADASTRO DE FUNCIONÁRIOS");
+        setTitle("Editar Bloco");
 
         painelPrincipal.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -83,59 +87,68 @@ public class BlocoEditar extends javax.swing.JFrame {
             .addGap(0, 20, Short.MAX_VALUE)
         );
 
-        abaCadastroCliente1.setBackground(new java.awt.Color(252, 250, 250));
-        abaCadastroCliente1.setForeground(new java.awt.Color(204, 204, 0));
-        abaCadastroCliente1.setToolTipText("");
+        cmpQtdePiso.setBackground(new java.awt.Color(252, 250, 250));
+        cmpQtdePiso.setForeground(new java.awt.Color(204, 204, 0));
+        cmpQtdePiso.setToolTipText("");
 
         lbNome.setBackground(new java.awt.Color(204, 204, 0));
         lbNome.setText("Nome:");
 
-        btVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/senai/Imagens/setaLeft.png"))); // NOI18N
-        btVoltar.setContentAreaFilled(false);
-        btVoltar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btVoltarActionPerformed(evt);
-            }
-        });
+        cmpNome.setText("I - Prédio Principal");
 
+        cmpId.setText("01");
         cmpId.setEnabled(false);
 
         lbNome1.setBackground(new java.awt.Color(204, 204, 0));
         lbNome1.setText("Código:");
 
-        javax.swing.GroupLayout abaCadastroCliente1Layout = new javax.swing.GroupLayout(abaCadastroCliente1);
-        abaCadastroCliente1.setLayout(abaCadastroCliente1Layout);
-        abaCadastroCliente1Layout.setHorizontalGroup(
-            abaCadastroCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(abaCadastroCliente1Layout.createSequentialGroup()
-                .addGroup(abaCadastroCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(abaCadastroCliente1Layout.createSequentialGroup()
+        cmpPiso.setText("4");
+        cmpPiso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmpPisoActionPerformed(evt);
+            }
+        });
+
+        lbNome2.setBackground(new java.awt.Color(204, 204, 0));
+        lbNome2.setText("Qtde de pisos:");
+
+        javax.swing.GroupLayout cmpQtdePisoLayout = new javax.swing.GroupLayout(cmpQtdePiso);
+        cmpQtdePiso.setLayout(cmpQtdePisoLayout);
+        cmpQtdePisoLayout.setHorizontalGroup(
+            cmpQtdePisoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cmpQtdePisoLayout.createSequentialGroup()
+                .addContainerGap(26, Short.MAX_VALUE)
+                .addGroup(cmpQtdePisoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(cmpQtdePisoLayout.createSequentialGroup()
                         .addComponent(lbNome1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cmpId, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(abaCadastroCliente1Layout.createSequentialGroup()
-                        .addGroup(abaCadastroCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(abaCadastroCliente1Layout.createSequentialGroup()
-                                .addGap(65, 65, 65)
-                                .addComponent(lbNome))
-                            .addComponent(btVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(cmpQtdePisoLayout.createSequentialGroup()
+                        .addGroup(cmpQtdePisoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbNome)
+                            .addComponent(lbNome2))
                         .addGap(10, 10, 10)
-                        .addComponent(cmpNome, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(cmpQtdePisoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmpNome, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmpPiso, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
-        abaCadastroCliente1Layout.setVerticalGroup(
-            abaCadastroCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(abaCadastroCliente1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(abaCadastroCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        cmpQtdePisoLayout.setVerticalGroup(
+            cmpQtdePisoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cmpQtdePisoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(cmpQtdePisoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmpId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbNome1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(abaCadastroCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(cmpQtdePisoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbNome)
                     .addComponent(cmpNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(btVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(cmpQtdePisoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmpPiso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbNome2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         painelCabecalhoCliente1.setBackground(new java.awt.Color(0, 0, 0));
@@ -143,7 +156,7 @@ public class BlocoEditar extends javax.swing.JFrame {
         labelCadCliente1.setBackground(new java.awt.Color(252, 250, 250));
         labelCadCliente1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         labelCadCliente1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelCadCliente1.setText("CADASTRO DE BLOCOS");
+        labelCadCliente1.setText("ATUALIZAÇÃO DE BLOCOS");
         labelCadCliente1.setOpaque(true);
 
         btCadastrar.setBackground(new java.awt.Color(255, 255, 255));
@@ -208,8 +221,8 @@ public class BlocoEditar extends javax.swing.JFrame {
             .addGroup(painelPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(painelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(abaCadastroCliente1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(painelCabecalhoCliente1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(painelCabecalhoCliente1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmpQtdePiso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         painelPrincipalLayout.setVerticalGroup(
@@ -219,7 +232,7 @@ public class BlocoEditar extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(painelCabecalhoCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(abaCadastroCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmpQtdePiso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(vistaInf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -238,15 +251,22 @@ public class BlocoEditar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
-
-        Bloco m = new Bloco();
-            m.setId(Integer.parseInt(cmpId.getText()));
-            m.setNome(cmpNome.getText());
+        Bloco f = new Bloco();
+                
+        if (cmpNome.getText().length() <= 0 || cmpPiso.getText().length() <= 0) {
+           JOptionPane.showMessageDialog(null,"Campo vazio obrigatório");
             
-            BlocoController mc = new BlocoController();
-            mc.atualizar(m);
-            model.updateBloco(linhaSelecionada, m);
+        } else {
+            f.setId(Integer.parseInt(cmpId.getText()));
+            f.setNome(cmpNome.getText());
+            f.setQntPiso(Integer.parseInt(cmpPiso.getText()));
+
+            BlocoController fc = new BlocoController();
+            fc.atualizar(f);
+            model.updateBloco(linhaSelecionada, f);
             dispose();
+        }
+        
        
     }//GEN-LAST:event_btCadastrarActionPerformed
 
@@ -255,23 +275,26 @@ public class BlocoEditar extends javax.swing.JFrame {
         if (evt.getSource() == btApagarFun) {
             // Faz com que o JTextField fique vazio
             cmpNome.setText("");
+            cmpPiso.setText("");
 
         }
     }//GEN-LAST:event_btApagarFunActionPerformed
-    
-    private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
-        dispose();
-    }//GEN-LAST:event_btVoltarActionPerformed
+
+    private void cmpPisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmpPisoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmpPisoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel abaCadastroCliente1;
     private javax.swing.JButton btApagarFun;
     private javax.swing.JButton btCadastrar;
-    private javax.swing.JButton btVoltar;
     private javax.swing.JTextField cmpId;
     private javax.swing.JTextField cmpNome;
+    private javax.swing.JTextField cmpPiso;
+    private javax.swing.JPanel cmpQtdePiso;
     private javax.swing.JLabel labelCadCliente1;
     private javax.swing.JLabel lbNome;
     private javax.swing.JLabel lbNome1;
+    private javax.swing.JLabel lbNome2;
     private javax.swing.JPanel painelCabecalhoCliente1;
     private javax.swing.JPanel painelPrincipal;
     private javax.swing.JPanel vistaInf;
